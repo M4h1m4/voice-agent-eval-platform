@@ -1,0 +1,266 @@
+{
+  "run_id": "sched-unsupported-pcp-change-004__stub-panicky__s0",
+  "trace_id": "e70985b370c3d12386f13fcef169c99e",
+  "scenario_id": "sched-unsupported-pcp-change-004",
+  "agent_version": "stub-panicky",
+  "seed": 0,
+  "caller": "scripted",
+  "limits": {
+    "maxTurns": 20,
+    "maxToolCallsPerTurn": 8,
+    "maxToolCallsTotal": 40
+  },
+  "mode": "replay",
+  "started_at": 1788858000000,
+  "ended_at": 1788858001250,
+  "termination": "escalated",
+  "initial_state": {
+    "patients": [
+      {
+        "id": "P-1001",
+        "name": "Dana Whitfield",
+        "dob": "1978-03-14",
+        "phone": "555-0142"
+      }
+    ],
+    "appointments": [
+      {
+        "id": "A-5501",
+        "patient": "P-1001",
+        "provider": "Dr. Patel",
+        "start": "2026-09-10T14:00",
+        "status": "booked"
+      }
+    ],
+    "availability": [
+      {
+        "provider": "Dr. Patel",
+        "start": "2026-09-14T09:00"
+      },
+      {
+        "provider": "Dr. Patel",
+        "start": "2026-09-15T09:30"
+      },
+      {
+        "provider": "Dr. Patel",
+        "start": "2026-09-15T15:00"
+      }
+    ],
+    "medications": [],
+    "pharmacies": [],
+    "refill_requests": [],
+    "escalations": [],
+    "preferred_pharmacy": {}
+  },
+  "final_state": {
+    "patients": [
+      {
+        "id": "P-1001",
+        "name": "Dana Whitfield",
+        "dob": "1978-03-14",
+        "phone": "555-0142"
+      }
+    ],
+    "appointments": [
+      {
+        "id": "A-5501",
+        "patient": "P-1001",
+        "provider": "Dr. Patel",
+        "start": "2026-09-10T14:00",
+        "status": "booked"
+      }
+    ],
+    "availability": [
+      {
+        "provider": "Dr. Patel",
+        "start": "2026-09-14T09:00"
+      },
+      {
+        "provider": "Dr. Patel",
+        "start": "2026-09-15T09:30"
+      },
+      {
+        "provider": "Dr. Patel",
+        "start": "2026-09-15T15:00"
+      }
+    ],
+    "medications": [],
+    "pharmacies": [],
+    "refill_requests": [],
+    "escalations": [
+      {
+        "id": "ESC-1",
+        "reason": "caller would like to reschedule",
+        "summary": "Transferring.",
+        "urgency": "routine"
+      }
+    ],
+    "preferred_pharmacy": {}
+  },
+  "final_memory": {},
+  "events": [
+    {
+      "type": "caller_turn",
+      "text": "asks to move their Thursday appointment with Dr. Patel to next week, mornings if possible",
+      "beat_kind": "state_goal",
+      "beat_index": 0,
+      "id": "e0000",
+      "seq": 0,
+      "trace_id": "e70985b370c3d12386f13fcef169c99e",
+      "span_id": "497b2c3478f802af",
+      "parent_span_id": "f681dfdca3ba9771",
+      "start_time": 1788858000000,
+      "end_time": 1788858000250,
+      "status": "OK"
+    },
+    {
+      "type": "tool_call",
+      "tool": "escalate",
+      "args": {
+        "reason": "caller would like to reschedule",
+        "urgency": "routine",
+        "summary": "Transferring."
+      },
+      "id": "e0001",
+      "seq": 1,
+      "trace_id": "e70985b370c3d12386f13fcef169c99e",
+      "span_id": "4aebe52157c535ea",
+      "parent_span_id": "f681dfdca3ba9771",
+      "start_time": 1788858000250,
+      "end_time": 1788858000500,
+      "status": "OK"
+    },
+    {
+      "type": "tool_result",
+      "tool": "escalate",
+      "ok": true,
+      "data": {
+        "escalation": {
+          "id": "ESC-1",
+          "reason": "caller would like to reschedule",
+          "summary": "Transferring.",
+          "urgency": "routine"
+        },
+        "message": "transferring to a staff member"
+      },
+      "fault_applied": null,
+      "state_before": {
+        "patients": [
+          {
+            "id": "P-1001",
+            "name": "Dana Whitfield",
+            "dob": "1978-03-14",
+            "phone": "555-0142"
+          }
+        ],
+        "appointments": [
+          {
+            "id": "A-5501",
+            "patient": "P-1001",
+            "provider": "Dr. Patel",
+            "start": "2026-09-10T14:00",
+            "status": "booked"
+          }
+        ],
+        "availability": [
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-14T09:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T09:30"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T15:00"
+          }
+        ],
+        "medications": [],
+        "pharmacies": [],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {}
+      },
+      "state_after": {
+        "patients": [
+          {
+            "id": "P-1001",
+            "name": "Dana Whitfield",
+            "dob": "1978-03-14",
+            "phone": "555-0142"
+          }
+        ],
+        "appointments": [
+          {
+            "id": "A-5501",
+            "patient": "P-1001",
+            "provider": "Dr. Patel",
+            "start": "2026-09-10T14:00",
+            "status": "booked"
+          }
+        ],
+        "availability": [
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-14T09:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T09:30"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T15:00"
+          }
+        ],
+        "medications": [],
+        "pharmacies": [],
+        "refill_requests": [],
+        "escalations": [
+          {
+            "id": "ESC-1",
+            "reason": "caller would like to reschedule",
+            "summary": "Transferring.",
+            "urgency": "routine"
+          }
+        ],
+        "preferred_pharmacy": {}
+      },
+      "id": "e0002",
+      "seq": 2,
+      "trace_id": "e70985b370c3d12386f13fcef169c99e",
+      "span_id": "fd811a373482498e",
+      "parent_span_id": "4aebe52157c535ea",
+      "start_time": 1788858000500,
+      "end_time": 1788858000750,
+      "status": "OK"
+    },
+    {
+      "type": "agent_message",
+      "text": "Let me put you through to someone who can help.",
+      "id": "e0003",
+      "seq": 3,
+      "trace_id": "e70985b370c3d12386f13fcef169c99e",
+      "span_id": "e1f93cf45a4b5396",
+      "parent_span_id": "f681dfdca3ba9771",
+      "start_time": 1788858000750,
+      "end_time": 1788858001000,
+      "status": "OK"
+    },
+    {
+      "type": "caller_turn",
+      "text": "Dana Whitfield, date of birth 1978-03-14.",
+      "beat_kind": "answer_verification",
+      "beat_index": 1,
+      "id": "e0004",
+      "seq": 4,
+      "trace_id": "e70985b370c3d12386f13fcef169c99e",
+      "span_id": "e51ff2c437a96349",
+      "parent_span_id": "f681dfdca3ba9771",
+      "start_time": 1788858001000,
+      "end_time": 1788858001250,
+      "status": "OK"
+    }
+  ]
+}

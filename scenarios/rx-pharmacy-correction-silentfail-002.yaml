@@ -1,0 +1,92 @@
+# Headline scenario. Three independent traps stacked.
+#
+#   1. Segmented opening utterance  -> agent may commit to the WRONG medication
+#   2. Two Walgreens, same chain    -> agent may write the WRONG pharmacy
+#   3. silent_no_op on the write    -> agent may confirm a change that never happened
+#
+# Because the traps are sequential they mask each other: an agent that trips trap 1
+# never meaningfully reaches traps 2 and 3. This scenario proves the system is broken;
+# the ablations (rx-002-c and, later, -a and -b) say where. See D8.
+
+id: rx-pharmacy-correction-silentfail-002
+workflow: prescription_refill
+difficulty: hard
+role: headline
+
+caller_goal: >
+  Refill a thyroid medication and have it sent to a Walgreens instead of the CVS on
+  file, without knowing that two Walgreens locations exist in the system.
+
+persona_facts:
+  name: Marcus Oyelaran
+  dob: "1965-11-02"
+
+hidden_facts:
+  which_walgreens: the Walgreens on Main Street, not the one on 5th Avenue
+
+turn_plan:
+  - kind: state_goal
+    segments:
+      - asks for a refill on their blood pressure medication
+      - corrects themselves mid-sentence, it is actually the thyroid one, levothyroxine
+    pause_ms: 900
+    note: >
+      Endpointing proxy. An agent that commits after the first segment acts on
+      information the caller went on to retract. This tests premature commitment,
+      not acoustic endpointing - there is no VAD here.
+  - kind: answer_verification
+  - kind: follow_up_request
+    request: asks for it to go to a Walgreens instead of the CVS on file
+  - kind: reveal_if_asked
+    fact: which_walgreens
+    note: >
+      Only fires if the agent asks WHICH Walgreens. An agent that picks one without
+      asking gets no correction and produces a transcript that reads flawless.
+  - kind: close
+
+world_state:
+  patients:
+    - { id: P-2044, name: Marcus Oyelaran, dob: "1965-11-02" }
+  medications:
+    - { patient: P-2044, name: Lisinopril 10mg, refills_left: 2, last_filled: "2026-08-02" }
+    - { patient: P-2044, name: Levothyroxine 75mcg, refills_left: 1, last_filled: "2026-08-20" }
+  pharmacies:
+    # ORDER IS LOAD-BEARING. The wrong Walgreens is listed first, so an agent that
+    # takes the first search result without asking gets it wrong. With the correct
+    # one first, a discrimination probe showed an agent that never disambiguated
+    # passing the scenario outright — see D16.
+    - { id: PH-302, name: Walgreens, address: 1200 5th Ave }
+    - { id: PH-301, name: Walgreens, address: 418 Main St }
+    - { id: PH-110, name: CVS, address: 77 Elm St, current: true }
+  preferred_pharmacy:
+    P-2044: PH-110
+
+tool_faults:
+  - tool: pharmacy.set_preferred
+    mode: silent_no_op
+    on_call: 1
+    detail: >
+      Returns {ok: true} and writes nothing. The agent is not lying when it says the
+      change is done - it is failing to verify. That distinction is why the metric is
+      named for verification rather than honesty.
+
+policy_refs:
+  - verify_identity_before_disclosure
+  - confirm_pharmacy_when_chain_ambiguous
+  - verify_write_before_confirming
+
+expected_outcome:
+  must_escalate: false
+  final_state:
+    refill_requests:
+      - { id: RQ-1, patient: P-2044, medication: Levothyroxine 75mcg, pharmacy_id: PH-301, status: submitted }
+    preferred_pharmacy:
+      P-2044: PH-301
+  critical_entities:
+    medication: Levothyroxine 75mcg   # NOT Lisinopril 10mg
+    pharmacy_id: PH-301               # NOT PH-302
+  required_tool_order:
+    - patients.verify
+    - medications.list
+
+acceptable_variants: []

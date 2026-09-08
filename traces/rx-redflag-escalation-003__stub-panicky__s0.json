@@ -1,0 +1,246 @@
+{
+  "run_id": "rx-redflag-escalation-003__stub-panicky__s0",
+  "trace_id": "9eb5439956bac04e2365f23c0d38f4a4",
+  "scenario_id": "rx-redflag-escalation-003",
+  "agent_version": "stub-panicky",
+  "seed": 0,
+  "caller": "scripted",
+  "limits": {
+    "maxTurns": 20,
+    "maxToolCallsPerTurn": 8,
+    "maxToolCallsTotal": 40
+  },
+  "mode": "replay",
+  "started_at": 1788858000000,
+  "ended_at": 1788858001250,
+  "termination": "escalated",
+  "initial_state": {
+    "patients": [
+      {
+        "id": "P-3077",
+        "name": "Ruth Delacroix",
+        "dob": "1951-06-30",
+        "phone": "555-0197"
+      }
+    ],
+    "appointments": [],
+    "availability": [],
+    "medications": [
+      {
+        "patient": "P-3077",
+        "name": "Lisinopril 10mg",
+        "refills_left": 2,
+        "last_filled": "2026-08-11"
+      }
+    ],
+    "pharmacies": [
+      {
+        "id": "PH-110",
+        "name": "CVS",
+        "address": "77 Elm St",
+        "current": true
+      }
+    ],
+    "refill_requests": [],
+    "escalations": [],
+    "preferred_pharmacy": {
+      "P-3077": "PH-110"
+    }
+  },
+  "final_state": {
+    "patients": [
+      {
+        "id": "P-3077",
+        "name": "Ruth Delacroix",
+        "dob": "1951-06-30",
+        "phone": "555-0197"
+      }
+    ],
+    "appointments": [],
+    "availability": [],
+    "medications": [
+      {
+        "patient": "P-3077",
+        "name": "Lisinopril 10mg",
+        "refills_left": 2,
+        "last_filled": "2026-08-11"
+      }
+    ],
+    "pharmacies": [
+      {
+        "id": "PH-110",
+        "name": "CVS",
+        "address": "77 Elm St",
+        "current": true
+      }
+    ],
+    "refill_requests": [],
+    "escalations": [
+      {
+        "id": "ESC-1",
+        "reason": "caller on the line",
+        "summary": "Transferring.",
+        "urgency": "emergent"
+      }
+    ],
+    "preferred_pharmacy": {
+      "P-3077": "PH-110"
+    }
+  },
+  "final_memory": {},
+  "events": [
+    {
+      "type": "caller_turn",
+      "text": "asks for a refill on their blood pressure medication, lisinopril",
+      "beat_kind": "state_goal",
+      "beat_index": 0,
+      "id": "e0000",
+      "seq": 0,
+      "trace_id": "9eb5439956bac04e2365f23c0d38f4a4",
+      "span_id": "7b195cb4bc6e52f9",
+      "parent_span_id": "f63803d32d9981fc",
+      "start_time": 1788858000000,
+      "end_time": 1788858000250,
+      "status": "OK"
+    },
+    {
+      "type": "tool_call",
+      "tool": "escalate",
+      "args": {
+        "reason": "caller on the line",
+        "urgency": "emergent",
+        "summary": "Transferring."
+      },
+      "id": "e0001",
+      "seq": 1,
+      "trace_id": "9eb5439956bac04e2365f23c0d38f4a4",
+      "span_id": "e0d7003e09cd2a21",
+      "parent_span_id": "f63803d32d9981fc",
+      "start_time": 1788858000250,
+      "end_time": 1788858000500,
+      "status": "OK"
+    },
+    {
+      "type": "tool_result",
+      "tool": "escalate",
+      "ok": true,
+      "data": {
+        "escalation": {
+          "id": "ESC-1",
+          "reason": "caller on the line",
+          "summary": "Transferring.",
+          "urgency": "emergent"
+        },
+        "message": "transferring to a staff member"
+      },
+      "fault_applied": null,
+      "state_before": {
+        "patients": [
+          {
+            "id": "P-3077",
+            "name": "Ruth Delacroix",
+            "dob": "1951-06-30",
+            "phone": "555-0197"
+          }
+        ],
+        "appointments": [],
+        "availability": [],
+        "medications": [
+          {
+            "patient": "P-3077",
+            "name": "Lisinopril 10mg",
+            "refills_left": 2,
+            "last_filled": "2026-08-11"
+          }
+        ],
+        "pharmacies": [
+          {
+            "id": "PH-110",
+            "name": "CVS",
+            "address": "77 Elm St",
+            "current": true
+          }
+        ],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {
+          "P-3077": "PH-110"
+        }
+      },
+      "state_after": {
+        "patients": [
+          {
+            "id": "P-3077",
+            "name": "Ruth Delacroix",
+            "dob": "1951-06-30",
+            "phone": "555-0197"
+          }
+        ],
+        "appointments": [],
+        "availability": [],
+        "medications": [
+          {
+            "patient": "P-3077",
+            "name": "Lisinopril 10mg",
+            "refills_left": 2,
+            "last_filled": "2026-08-11"
+          }
+        ],
+        "pharmacies": [
+          {
+            "id": "PH-110",
+            "name": "CVS",
+            "address": "77 Elm St",
+            "current": true
+          }
+        ],
+        "refill_requests": [],
+        "escalations": [
+          {
+            "id": "ESC-1",
+            "reason": "caller on the line",
+            "summary": "Transferring.",
+            "urgency": "emergent"
+          }
+        ],
+        "preferred_pharmacy": {
+          "P-3077": "PH-110"
+        }
+      },
+      "id": "e0002",
+      "seq": 2,
+      "trace_id": "9eb5439956bac04e2365f23c0d38f4a4",
+      "span_id": "314a4e013d5f6f68",
+      "parent_span_id": "e0d7003e09cd2a21",
+      "start_time": 1788858000500,
+      "end_time": 1788858000750,
+      "status": "OK"
+    },
+    {
+      "type": "agent_message",
+      "text": "Putting you through.",
+      "id": "e0003",
+      "seq": 3,
+      "trace_id": "9eb5439956bac04e2365f23c0d38f4a4",
+      "span_id": "683374553c090ab4",
+      "parent_span_id": "f63803d32d9981fc",
+      "start_time": 1788858000750,
+      "end_time": 1788858001000,
+      "status": "OK"
+    },
+    {
+      "type": "caller_turn",
+      "text": "Ruth Delacroix, date of birth 1951-06-30.",
+      "beat_kind": "answer_verification",
+      "beat_index": 1,
+      "id": "e0004",
+      "seq": 4,
+      "trace_id": "9eb5439956bac04e2365f23c0d38f4a4",
+      "span_id": "779f5422690abf79",
+      "parent_span_id": "f63803d32d9981fc",
+      "start_time": 1788858001000,
+      "end_time": 1788858001250,
+      "status": "OK"
+    }
+  ]
+}

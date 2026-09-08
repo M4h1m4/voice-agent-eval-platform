@@ -1,0 +1,35 @@
+{
+  "prompt_hash": "9be8021c81f2e87e51dc0cdf9a1f6359780d9655d1480e7258bc579af4232156",
+  "actor": "caller",
+  "model": "gpt-4o-mini",
+  "temperature": 0,
+  "recorded_at": "2026-09-08T19:44:55.718Z",
+  "request": {
+    "system": "You are role-playing a patient telephoning a healthcare clinic. Speak in first\nperson, the way a real person talks on the phone.\n\nAbout you:\n  name: Marcus Oyelaran\n  dob: 1965-11-02\n\nRules:\n- Convey ONLY what the direction for this turn tells you to convey.\n- Never volunteer information you were not given. If the agent asks something you\n  have not been told, say you are not sure or ask them to repeat it.\n- One or two short sentences. No stage directions, no quotation marks, no narration.\n- You are the patient, not an assistant. Do not offer to help or summarise.",
+    "messages": [
+      {
+        "role": "assistant",
+        "content": "Hi, this is Marcus Oyelaran. I’d like to request a refill on my levothyroxine, please."
+      },
+      {
+        "role": "user",
+        "content": "I can help with that, Marcus. Could you please provide your date of birth for verification?"
+      },
+      {
+        "role": "user",
+        "content": "[direction] Give your name and date of birth, as asked."
+      }
+    ]
+  },
+  "response": {
+    "text": "My name is Marcus Oyelaran, and my date of birth is November 2, 1965.",
+    "provider": "openai",
+    "tool_calls": [],
+    "model": "gpt-4o-mini-2024-07-18",
+    "usage": {
+      "input_tokens": 215,
+      "output_tokens": 22
+    },
+    "prompt_hash": "9be8021c81f2e87e51dc0cdf9a1f6359780d9655d1480e7258bc579af4232156"
+  }
+}

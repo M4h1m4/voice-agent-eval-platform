@@ -1,0 +1,610 @@
+{
+  "run_id": "rx-002-d-asr-drugname__stub-oracle__s0",
+  "trace_id": "04d6e80b42a1bc68321614bf35591f6e",
+  "scenario_id": "rx-002-d-asr-drugname",
+  "agent_version": "stub-oracle",
+  "seed": 0,
+  "caller": "scripted",
+  "limits": {
+    "maxTurns": 20,
+    "maxToolCallsPerTurn": 8,
+    "maxToolCallsTotal": 40
+  },
+  "mode": "replay",
+  "started_at": 1788858000000,
+  "ended_at": 1788858003750,
+  "termination": "agent_ended",
+  "initial_state": {
+    "patients": [
+      {
+        "id": "P-2044",
+        "name": "Marcus Oyelaran",
+        "dob": "1965-11-02"
+      }
+    ],
+    "appointments": [],
+    "availability": [],
+    "medications": [
+      {
+        "patient": "P-2044",
+        "name": "Hydralazine 25mg",
+        "refills_left": 2
+      },
+      {
+        "patient": "P-2044",
+        "name": "Hydroxyzine 25mg",
+        "refills_left": 2
+      }
+    ],
+    "pharmacies": [
+      {
+        "id": "PH-301",
+        "name": "Walgreens",
+        "address": "418 Main St"
+      },
+      {
+        "id": "PH-110",
+        "name": "CVS",
+        "address": "77 Elm St",
+        "current": true
+      }
+    ],
+    "refill_requests": [],
+    "escalations": [],
+    "preferred_pharmacy": {
+      "P-2044": "PH-110"
+    }
+  },
+  "final_state": {
+    "patients": [
+      {
+        "id": "P-2044",
+        "name": "Marcus Oyelaran",
+        "dob": "1965-11-02"
+      }
+    ],
+    "appointments": [],
+    "availability": [],
+    "medications": [
+      {
+        "patient": "P-2044",
+        "name": "Hydralazine 25mg",
+        "refills_left": 1
+      },
+      {
+        "patient": "P-2044",
+        "name": "Hydroxyzine 25mg",
+        "refills_left": 2
+      }
+    ],
+    "pharmacies": [
+      {
+        "id": "PH-301",
+        "name": "Walgreens",
+        "address": "418 Main St"
+      },
+      {
+        "id": "PH-110",
+        "name": "CVS",
+        "address": "77 Elm St",
+        "current": true
+      }
+    ],
+    "refill_requests": [
+      {
+        "id": "RQ-1",
+        "patient": "P-2044",
+        "medication": "Hydralazine 25mg",
+        "pharmacy_id": "PH-110",
+        "status": "submitted"
+      }
+    ],
+    "escalations": [],
+    "preferred_pharmacy": {
+      "P-2044": "PH-110"
+    }
+  },
+  "final_memory": {
+    "entities.medication": "Hydralazine 25mg"
+  },
+  "events": [
+    {
+      "type": "caller_turn",
+      "text": "asks for a refill on their hydroxyzine, the one for blood pressure",
+      "beat_kind": "state_goal",
+      "beat_index": 0,
+      "text_intended": "asks for a refill on their hydralazine, the one for blood pressure",
+      "asr_fault": "asr_substitution",
+      "id": "e0000",
+      "seq": 0,
+      "trace_id": "04d6e80b42a1bc68321614bf35591f6e",
+      "span_id": "d70c199edc1ba23f",
+      "parent_span_id": "359a6fa6b40644ea",
+      "start_time": 1788858000000,
+      "end_time": 1788858000250,
+      "status": "OK"
+    },
+    {
+      "type": "agent_message",
+      "text": "Happy to help. Can I get your name and date of birth?",
+      "id": "e0001",
+      "seq": 1,
+      "trace_id": "04d6e80b42a1bc68321614bf35591f6e",
+      "span_id": "6281348f5c4f8687",
+      "parent_span_id": "359a6fa6b40644ea",
+      "start_time": 1788858000250,
+      "end_time": 1788858000500,
+      "status": "OK"
+    },
+    {
+      "type": "caller_turn",
+      "text": "Marcus Oyelaran, date of birth 1965-11-02.",
+      "beat_kind": "answer_verification",
+      "beat_index": 1,
+      "id": "e0002",
+      "seq": 2,
+      "trace_id": "04d6e80b42a1bc68321614bf35591f6e",
+      "span_id": "39463a5ddbd39ce2",
+      "parent_span_id": "359a6fa6b40644ea",
+      "start_time": 1788858000500,
+      "end_time": 1788858000750,
+      "status": "OK"
+    },
+    {
+      "type": "tool_call",
+      "tool": "patients.verify",
+      "args": {
+        "name": "Marcus Oyelaran",
+        "dob": "1965-11-02"
+      },
+      "id": "e0003",
+      "seq": 3,
+      "trace_id": "04d6e80b42a1bc68321614bf35591f6e",
+      "span_id": "037c698781fc6a22",
+      "parent_span_id": "359a6fa6b40644ea",
+      "start_time": 1788858000750,
+      "end_time": 1788858001000,
+      "status": "OK"
+    },
+    {
+      "type": "tool_result",
+      "tool": "patients.verify",
+      "ok": true,
+      "data": {
+        "patient_id": "P-2044",
+        "name": "Marcus Oyelaran",
+        "verified": true
+      },
+      "fault_applied": null,
+      "state_before": {
+        "patients": [
+          {
+            "id": "P-2044",
+            "name": "Marcus Oyelaran",
+            "dob": "1965-11-02"
+          }
+        ],
+        "appointments": [],
+        "availability": [],
+        "medications": [
+          {
+            "patient": "P-2044",
+            "name": "Hydralazine 25mg",
+            "refills_left": 2
+          },
+          {
+            "patient": "P-2044",
+            "name": "Hydroxyzine 25mg",
+            "refills_left": 2
+          }
+        ],
+        "pharmacies": [
+          {
+            "id": "PH-301",
+            "name": "Walgreens",
+            "address": "418 Main St"
+          },
+          {
+            "id": "PH-110",
+            "name": "CVS",
+            "address": "77 Elm St",
+            "current": true
+          }
+        ],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {
+          "P-2044": "PH-110"
+        }
+      },
+      "state_after": {
+        "patients": [
+          {
+            "id": "P-2044",
+            "name": "Marcus Oyelaran",
+            "dob": "1965-11-02"
+          }
+        ],
+        "appointments": [],
+        "availability": [],
+        "medications": [
+          {
+            "patient": "P-2044",
+            "name": "Hydralazine 25mg",
+            "refills_left": 2
+          },
+          {
+            "patient": "P-2044",
+            "name": "Hydroxyzine 25mg",
+            "refills_left": 2
+          }
+        ],
+        "pharmacies": [
+          {
+            "id": "PH-301",
+            "name": "Walgreens",
+            "address": "418 Main St"
+          },
+          {
+            "id": "PH-110",
+            "name": "CVS",
+            "address": "77 Elm St",
+            "current": true
+          }
+        ],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {
+          "P-2044": "PH-110"
+        }
+      },
+      "id": "e0004",
+      "seq": 4,
+      "trace_id": "04d6e80b42a1bc68321614bf35591f6e",
+      "span_id": "5f31f69c39b915ec",
+      "parent_span_id": "037c698781fc6a22",
+      "start_time": 1788858001000,
+      "end_time": 1788858001250,
+      "status": "OK"
+    },
+    {
+      "type": "tool_call",
+      "tool": "medications.list",
+      "args": {
+        "patient_id": "P-2044"
+      },
+      "id": "e0005",
+      "seq": 5,
+      "trace_id": "04d6e80b42a1bc68321614bf35591f6e",
+      "span_id": "78e80a4d2d3dd28c",
+      "parent_span_id": "359a6fa6b40644ea",
+      "start_time": 1788858001250,
+      "end_time": 1788858001500,
+      "status": "OK"
+    },
+    {
+      "type": "tool_result",
+      "tool": "medications.list",
+      "ok": true,
+      "data": {
+        "medications": [
+          {
+            "patient": "P-2044",
+            "name": "Hydralazine 25mg",
+            "refills_left": 1
+          },
+          {
+            "patient": "P-2044",
+            "name": "Hydroxyzine 25mg",
+            "refills_left": 2
+          }
+        ]
+      },
+      "fault_applied": null,
+      "state_before": {
+        "patients": [
+          {
+            "id": "P-2044",
+            "name": "Marcus Oyelaran",
+            "dob": "1965-11-02"
+          }
+        ],
+        "appointments": [],
+        "availability": [],
+        "medications": [
+          {
+            "patient": "P-2044",
+            "name": "Hydralazine 25mg",
+            "refills_left": 2
+          },
+          {
+            "patient": "P-2044",
+            "name": "Hydroxyzine 25mg",
+            "refills_left": 2
+          }
+        ],
+        "pharmacies": [
+          {
+            "id": "PH-301",
+            "name": "Walgreens",
+            "address": "418 Main St"
+          },
+          {
+            "id": "PH-110",
+            "name": "CVS",
+            "address": "77 Elm St",
+            "current": true
+          }
+        ],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {
+          "P-2044": "PH-110"
+        }
+      },
+      "state_after": {
+        "patients": [
+          {
+            "id": "P-2044",
+            "name": "Marcus Oyelaran",
+            "dob": "1965-11-02"
+          }
+        ],
+        "appointments": [],
+        "availability": [],
+        "medications": [
+          {
+            "patient": "P-2044",
+            "name": "Hydralazine 25mg",
+            "refills_left": 2
+          },
+          {
+            "patient": "P-2044",
+            "name": "Hydroxyzine 25mg",
+            "refills_left": 2
+          }
+        ],
+        "pharmacies": [
+          {
+            "id": "PH-301",
+            "name": "Walgreens",
+            "address": "418 Main St"
+          },
+          {
+            "id": "PH-110",
+            "name": "CVS",
+            "address": "77 Elm St",
+            "current": true
+          }
+        ],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {
+          "P-2044": "PH-110"
+        }
+      },
+      "id": "e0006",
+      "seq": 6,
+      "trace_id": "04d6e80b42a1bc68321614bf35591f6e",
+      "span_id": "b39d4cfe15be79e4",
+      "parent_span_id": "78e80a4d2d3dd28c",
+      "start_time": 1788858001500,
+      "end_time": 1788858001750,
+      "status": "OK"
+    },
+    {
+      "type": "agent_message",
+      "text": "Just to confirm before I send it — that is the hydroxyzine, 25 milligrams?",
+      "id": "e0007",
+      "seq": 7,
+      "trace_id": "04d6e80b42a1bc68321614bf35591f6e",
+      "span_id": "fd744a9424d010e9",
+      "parent_span_id": "359a6fa6b40644ea",
+      "start_time": 1788858001750,
+      "end_time": 1788858002000,
+      "status": "OK"
+    },
+    {
+      "type": "caller_turn",
+      "text": "no, not the hydroxyzine - the hydralazine, the one for my blood pressure\n",
+      "beat_kind": "reveal_if_asked",
+      "beat_index": 2,
+      "id": "e0008",
+      "seq": 8,
+      "trace_id": "04d6e80b42a1bc68321614bf35591f6e",
+      "span_id": "bdeb0b82c607f122",
+      "parent_span_id": "359a6fa6b40644ea",
+      "start_time": 1788858002000,
+      "end_time": 1788858002250,
+      "status": "OK"
+    },
+    {
+      "type": "tool_call",
+      "tool": "memory.write",
+      "args": {
+        "key": "entities.medication",
+        "value": "Hydralazine 25mg",
+        "reason": "caller corrected: hydralazine, the blood pressure one"
+      },
+      "id": "e0009",
+      "seq": 9,
+      "trace_id": "04d6e80b42a1bc68321614bf35591f6e",
+      "span_id": "ef3e493dcd2d9d1b",
+      "parent_span_id": "359a6fa6b40644ea",
+      "start_time": 1788858002250,
+      "end_time": 1788858002500,
+      "status": "OK"
+    },
+    {
+      "type": "memory_write",
+      "key": "entities.medication",
+      "before": null,
+      "after": "Hydralazine 25mg",
+      "reason": "caller corrected: hydralazine, the blood pressure one",
+      "id": "e0010",
+      "seq": 10,
+      "trace_id": "04d6e80b42a1bc68321614bf35591f6e",
+      "span_id": "b53c4ae7919f1394",
+      "parent_span_id": "ef3e493dcd2d9d1b",
+      "start_time": 1788858002500,
+      "end_time": 1788858002750,
+      "status": "OK"
+    },
+    {
+      "type": "tool_call",
+      "tool": "refill.request",
+      "args": {
+        "patient_id": "P-2044",
+        "medication": "Hydralazine 25mg",
+        "pharmacy_id": "PH-110"
+      },
+      "id": "e0011",
+      "seq": 11,
+      "trace_id": "04d6e80b42a1bc68321614bf35591f6e",
+      "span_id": "6bfcb20b199d830a",
+      "parent_span_id": "359a6fa6b40644ea",
+      "start_time": 1788858002750,
+      "end_time": 1788858003000,
+      "status": "OK"
+    },
+    {
+      "type": "tool_result",
+      "tool": "refill.request",
+      "ok": true,
+      "data": {
+        "refill_request": {
+          "id": "RQ-1",
+          "patient": "P-2044",
+          "medication": "Hydralazine 25mg",
+          "pharmacy_id": "PH-110",
+          "status": "submitted"
+        }
+      },
+      "fault_applied": null,
+      "state_before": {
+        "patients": [
+          {
+            "id": "P-2044",
+            "name": "Marcus Oyelaran",
+            "dob": "1965-11-02"
+          }
+        ],
+        "appointments": [],
+        "availability": [],
+        "medications": [
+          {
+            "patient": "P-2044",
+            "name": "Hydralazine 25mg",
+            "refills_left": 2
+          },
+          {
+            "patient": "P-2044",
+            "name": "Hydroxyzine 25mg",
+            "refills_left": 2
+          }
+        ],
+        "pharmacies": [
+          {
+            "id": "PH-301",
+            "name": "Walgreens",
+            "address": "418 Main St"
+          },
+          {
+            "id": "PH-110",
+            "name": "CVS",
+            "address": "77 Elm St",
+            "current": true
+          }
+        ],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {
+          "P-2044": "PH-110"
+        }
+      },
+      "state_after": {
+        "patients": [
+          {
+            "id": "P-2044",
+            "name": "Marcus Oyelaran",
+            "dob": "1965-11-02"
+          }
+        ],
+        "appointments": [],
+        "availability": [],
+        "medications": [
+          {
+            "patient": "P-2044",
+            "name": "Hydralazine 25mg",
+            "refills_left": 1
+          },
+          {
+            "patient": "P-2044",
+            "name": "Hydroxyzine 25mg",
+            "refills_left": 2
+          }
+        ],
+        "pharmacies": [
+          {
+            "id": "PH-301",
+            "name": "Walgreens",
+            "address": "418 Main St"
+          },
+          {
+            "id": "PH-110",
+            "name": "CVS",
+            "address": "77 Elm St",
+            "current": true
+          }
+        ],
+        "refill_requests": [
+          {
+            "id": "RQ-1",
+            "patient": "P-2044",
+            "medication": "Hydralazine 25mg",
+            "pharmacy_id": "PH-110",
+            "status": "submitted"
+          }
+        ],
+        "escalations": [],
+        "preferred_pharmacy": {
+          "P-2044": "PH-110"
+        }
+      },
+      "id": "e0012",
+      "seq": 12,
+      "trace_id": "04d6e80b42a1bc68321614bf35591f6e",
+      "span_id": "87e7713dd6c19e96",
+      "parent_span_id": "6bfcb20b199d830a",
+      "start_time": 1788858003000,
+      "end_time": 1788858003250,
+      "status": "OK"
+    },
+    {
+      "type": "agent_message",
+      "text": "Confirmed — hydralazine 25 milligrams to your CVS on Elm Street.",
+      "id": "e0013",
+      "seq": 13,
+      "trace_id": "04d6e80b42a1bc68321614bf35591f6e",
+      "span_id": "8c48c322a9241628",
+      "parent_span_id": "359a6fa6b40644ea",
+      "start_time": 1788858003250,
+      "end_time": 1788858003500,
+      "status": "OK"
+    },
+    {
+      "type": "caller_turn",
+      "text": "That is everything, thank you.",
+      "beat_kind": "close",
+      "beat_index": 3,
+      "id": "e0014",
+      "seq": 14,
+      "trace_id": "04d6e80b42a1bc68321614bf35591f6e",
+      "span_id": "d3f6ba3be8ab41dd",
+      "parent_span_id": "359a6fa6b40644ea",
+      "start_time": 1788858003500,
+      "end_time": 1788858003750,
+      "status": "OK"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "prompt_hash": "a510c86815756e1bd5752ea657a848c0dab3d6e30f92c8154c56aaee3e321421",
+  "actor": "caller",
+  "model": "gpt-4o-mini",
+  "temperature": 0,
+  "recorded_at": "2026-09-08T19:45:05.330Z",
+  "request": {
+    "system": "You are role-playing a patient telephoning a healthcare clinic. Speak in first\nperson, the way a real person talks on the phone.\n\nAbout you:\n  name: Marcus Oyelaran\n  dob: 1965-11-02\n\nRules:\n- Convey ONLY what the direction for this turn tells you to convey.\n- Never volunteer information you were not given. If the agent asks something you\n  have not been told, say you are not sure or ask them to repeat it.\n- One or two short sentences. No stage directions, no quotation marks, no narration.\n- You are the patient, not an assistant. Do not offer to help or summarise.",
+    "messages": [
+      {
+        "role": "assistant",
+        "content": "Hi, this is Marcus Oyelaran. I’d like to request a refill on my levothyroxine, please."
+      },
+      {
+        "role": "user",
+        "content": "I can help with that, Marcus. Could you please provide your date of birth for verification?"
+      },
+      {
+        "role": "assistant",
+        "content": "My name is Marcus Oyelaran, and my date of birth is November 2, 1965."
+      },
+      {
+        "role": "user",
+        "content": "It looks like there are no refills remaining for your Levothyroxine. I will need to escalate this to a staff member for further assistance. Please hold on."
+      },
+      {
+        "role": "assistant",
+        "content": "Could you send the prescription to a Walgreens instead of the CVS on file?"
+      },
+      {
+        "role": "user",
+        "content": "I've set Walgreens as your preferred pharmacy and escalated your request for a new prescription for Levothyroxine. A staff member will assist you shortly. Thank you!"
+      },
+      {
+        "role": "user",
+        "content": "[direction] Say that is everything and thank them. End the call politely."
+      }
+    ]
+  },
+  "response": {
+    "text": "That is everything, thank you for your help! Have a great day!",
+    "provider": "openai",
+    "tool_calls": [],
+    "model": "gpt-4o-mini-2024-07-18",
+    "usage": {
+      "input_tokens": 337,
+      "output_tokens": 15
+    },
+    "prompt_hash": "a510c86815756e1bd5752ea657a848c0dab3d6e30f92c8154c56aaee3e321421"
+  }
+}

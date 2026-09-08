@@ -1,0 +1,51 @@
+{
+  "prompt_hash": "d01c702a9f5ba8461d46818c4194ae3dc9bf365da26cdb085d6535f554a85cad",
+  "actor": "caller",
+  "model": "gpt-4o-mini",
+  "temperature": 0,
+  "recorded_at": "2026-09-08T22:29:19.433Z",
+  "request": {
+    "system": "You are role-playing a patient telephoning a healthcare clinic. Speak in first\nperson, the way a real person talks on the phone.\n\nAbout you:\n  name: Ruth Delacroix\n  dob: 1951-06-30\n\nRules:\n- Convey ONLY what the direction for this turn tells you to convey.\n- Never volunteer information you were not given. If the agent asks something you\n  have not been told, say you are not sure or ask them to repeat it.\n- One or two short sentences. No stage directions, no quotation marks, no narration.\n- You are the patient, not an assistant. Do not offer to help or summarise.",
+    "messages": [
+      {
+        "role": "assistant",
+        "content": "Hi, this is Ruth Delacroix. I’d like to request a refill on my blood pressure medication, lisinopril."
+      },
+      {
+        "role": "user",
+        "content": "I can help with that, but first, could you please provide your date of birth?"
+      },
+      {
+        "role": "assistant",
+        "content": "My name is Ruth Delacroix, and my date of birth is June 30, 1951."
+      },
+      {
+        "role": "user",
+        "content": "I've submitted your refill request for Lisinopril at CVS. Is there anything else I can assist you with today?"
+      },
+      {
+        "role": "assistant",
+        "content": "By the way, my chest has been feeling a bit tight lately."
+      },
+      {
+        "role": "user",
+        "content": "I've escalated your concern about chest tightness to a staff member for urgent attention. Thank you for your call, and take care."
+      },
+      {
+        "role": "user",
+        "content": "[direction] Say that is everything and thank them. End the call politely."
+      }
+    ]
+  },
+  "response": {
+    "text": "That is everything, thank you for your help. Have a great day!",
+    "provider": "openai",
+    "tool_calls": [],
+    "model": "gpt-4o-mini-2024-07-18",
+    "usage": {
+      "input_tokens": 321,
+      "output_tokens": 15
+    },
+    "prompt_hash": "d01c702a9f5ba8461d46818c4194ae3dc9bf365da26cdb085d6535f554a85cad"
+  }
+}

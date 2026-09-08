@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kyron Medical — Voice Agent Evaluation Platform</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-brand">
+      <div class="brand-logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+        </svg>
+      </div>
+      <div>
+        <h1 class="brand-title">Kyron Medical</h1>
+        <p class="brand-subtitle">Clinical Voice Agent Evaluation Platform</p>
+      </div>
+    </div>
+
+    <div class="header-stats" id="headerStats">
+      <div class="stat-pill">
+        <span class="stat-label">Runs</span>
+        <span class="stat-value" id="statTotalRuns">-</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-label">Pass Rate</span>
+        <span class="stat-value stat-pass" id="statPassRate">-%</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-label">Model</span>
+        <span class="stat-value">gpt-4o-mini</span>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button class="btn btn-primary" id="btnOpenRunModal">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+        Run Simulation
+      </button>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="nav-tabs">
+    <button class="tab-btn active" data-tab="tab-runs">Runs Dashboard</button>
+    <button class="tab-btn" data-tab="tab-inspector" id="navTabInspector">Trace & Metric Inspector</button>
+    <button class="tab-btn" data-tab="tab-compare">Version Comparison (v1 vs v2)</button>
+    <button class="tab-btn" data-tab="tab-scenarios">Scenarios</button>
+  </nav>
+
+  <!-- Main Container -->
+  <main class="main-container">
+
+    <!-- =================================================================== -->
+    <!-- TAB 1: RUNS DASHBOARD -->
+    <!-- =================================================================== -->
+    <section class="tab-content active" id="tab-runs">
+      <!-- KPI Overview Cards -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-title">Total Benchmark Runs</div>
+          <div class="kpi-value" id="kpiTotalRuns">-</div>
+          <div class="kpi-subtext">Across 6 clinical scenarios & 5 agents</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title">Benchmark Pass Rate</div>
+          <div class="kpi-value" id="kpiPassRate">-%</div>
+          <div class="kpi-subtext" id="kpiPassSubtext">Passing all outcome & process checks</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title">Process & Safety Violations</div>
+          <div class="kpi-value kpi-fail" id="kpiProcessViolations">-</div>
+          <div class="kpi-subtext">Redundant writes, missing read-backs, under-escalations</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-title">Human Overrides</div>
+          <div class="kpi-value" id="kpiHumanReviews">-</div>
+          <div class="kpi-subtext">Clinical QA notes & verdict overrides</div>
+        </div>
+      </div>
+
+      <!-- Filters Toolbar -->
+      <div class="toolbar">
+        <div class="filter-group">
+          <label>Scenario:</label>
+          <select id="filterScenario" class="select-input">
+            <option value="all">All Scenarios (6)</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label>Agent:</label>
+          <select id="filterAgent" class="select-input">
+            <option value="all">All Agents</option>
+            <option value="llm-v1">LLM v1 (Baseline)</option>
+            <option value="llm-v2">LLM v2 (Read-Back Prompt)</option>
+            <option value="stub-oracle">Stub: Oracle (Answer Key)</option>
+            <option value="stub-naive">Stub: Naive (Flawed)</option>
+            <option value="stub-panicky">Stub: Panicky (Over-Escalating)</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label>Verdict:</label>
+          <select id="filterVerdict" class="select-input">
+            <option value="all">All Verdicts</option>
+            <option value="pass">Pass Only</option>
+            <option value="fail">Fail Only</option>
+            <option value="reviewed">Human Reviewed</option>
+          </select>
+        </div>
+
+        <div class="toolbar-search">
+          <input type="text" id="filterSearch" placeholder="Search by Run ID, keyword..." class="text-input">
+        </div>
+      </div>
+
+      <!-- Runs Table -->
+      <div class="table-card">
+        <table class="data-table" id="runsTable">
+          <thead>
+            <tr>
+              <th>Run ID</th>
+              <th>Scenario</th>
+              <th>Agent</th>
+              <th>Termination</th>
+              <th>Process Checks</th>
+              <th>Outcome State</th>
+              <th>Judged Policy</th>
+              <th>Verdict</th>
+              <th>Audit</th>
+            </tr>
+          </thead>
+          <tbody id="runsTableBody">
+            <tr><td colspan="9" class="table-loading">Loading evaluation runs...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 2: TRACE & METRIC INSPECTOR -->
+    <!-- =================================================================== -->
+    <section class="tab-content" id="tab-inspector">
+      <div class="inspector-header" id="inspectorHeader">
+        <div class="inspector-title-wrap">
+          <span class="badge" id="inspVerdictBadge">PASS</span>
+          <h2 id="inspRunId">Select a run to inspect</h2>
+          <span class="tag" id="inspTerminationTag">-</span>
+          <span class="tag" id="inspModeTag">mode: replay</span>
+        </div>
+        <div class="inspector-actions">
+          <button class="btn btn-secondary btn-sm" id="btnRerunCurrent">Rerun Run</button>
+          <button class="btn btn-secondary btn-sm" id="btnCompareCurrent">Compare with...</button>
+        </div>
+      </div>
+
+      <div class="inspector-grid">
+        <!-- Left: Evaluation Metrics & Policy Cards -->
+        <div class="inspector-panel metrics-panel">
+          <div class="panel-header">
+            <h3>Part 3 Evaluation Metrics & Policy Checks</h3>
+            <span class="badge-count" id="inspMetricsCount">0 metrics</span>
+          </div>
+
+          <div class="metrics-list" id="inspMetricsList">
+            <!-- Dynamic metric cards injected here -->
+          </div>
+
+          <!-- Human Review & Override Form -->
+          <div class="review-box">
+            <h4>Clinical Review & Verdict Override</h4>
+            <div class="form-row">
+              <label>Reviewer:</label>
+              <input type="text" id="reviewAuthor" class="text-input" placeholder="e.g. Dr. Patel / QA Lead">
+            </div>
+            <div class="form-row">
+              <label>Verdict Override:</label>
+              <select id="reviewOverride" class="select-input">
+                <option value="">No Override (Keep Automated)</option>
+                <option value="pass">Force PASS (False Negative)</option>
+                <option value="fail">Force FAIL (False Positive)</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label>Review Notes & Clinical Rationale:</label>
+              <textarea id="reviewNotes" class="textarea-input" rows="3" placeholder="Explain rationale for overriding or confirming metric findings..."></textarea>
+            </div>
+            <button class="btn btn-primary btn-sm" id="btnSaveReview">Save Review & Override</button>
+          </div>
+        </div>
+
+        <!-- Right: Trace Conversation, Tool Calls & World State -->
+        <div class="inspector-panel trace-panel">
+          <div class="panel-header">
+            <div class="subtabs">
+              <button class="subtab-btn active" data-subtab="subtab-transcript">Conversation & Tool Calls</button>
+              <button class="subtab-btn" data-subtab="subtab-world">Clinic World State Diff</button>
+              <button class="subtab-btn" data-subtab="subtab-raw">Raw JSON</button>
+            </div>
+          </div>
+
+          <!-- Subtab 1: Chronological Dialogue & Spans -->
+          <div class="subtab-content active" id="subtab-transcript">
+            <div class="timeline" id="inspTimeline">
+              <!-- Event cards injected here -->
+            </div>
+          </div>
+
+          <!-- Subtab 2: World State Diff -->
+          <div class="subtab-content" id="subtab-world">
+            <div class="world-diff-container" id="inspWorldDiff">
+              <!-- World state diff injected here -->
+            </div>
+          </div>
+
+          <!-- Subtab 3: Raw JSON -->
+          <div class="subtab-content" id="subtab-raw">
+            <pre class="code-block" id="inspRawJson"></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- TAB 3: VERSION COMPARISON (v1 vs v2) -->
+    <!-- =================================================================== -->
+    <!-- Scenarios: the dataset itself. A run id names a scenario but cannot describe
+         it, so this tab explains what each one puts the agent under. -->
+    <section class="tab-content" id="tab-scenarios">
+      <div class="scenario-layout">
+        <aside class="scenario-list" id="scenarioList"></aside>
+        <div class="scenario-detail" id="scenarioDetail">
+          <p style="color:var(--text-dim);">Select a scenario.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="tab-content" id="tab-compare">
+      <div class="compare-toolbar">
+        <div class="compare-selector">
+          <label>Scenario:</label>
+          <select id="compScenarioSelect" class="select-input"></select>
+        </div>
+        <div class="compare-selector">
+          <label>Baseline (Run A):</label>
+          <select id="compRunASelect" class="select-input"></select>
+        </div>
+        <div class="compare-vs">vs</div>
+        <div class="compare-selector">
+          <label>Candidate (Run B):</label>
+          <select id="compRunBSelect" class="select-input"></select>
+        </div>
+        <button class="btn btn-primary" id="btnRunComparison">Compare Runs</button>
+      </div>
+
+      <!-- Comparison Findings Summary Banner -->
+      <div class="compare-headline" id="compHeadline">
+        <!-- Injected comparison summary -->
+      </div>
+
+      <!-- Metrics Regression Table -->
+      <div class="table-card">
+        <div class="card-header">
+          <h3>Metrics Movement & Regression Diff</h3>
+        </div>
+        <table class="data-table" id="compMetricsTable">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Category</th>
+              <th>Baseline (Run A)</th>
+              <th>Candidate (Run B)</th>
+              <th>Status</th>
+              <th>Diagnostic Detail</th>
+            </tr>
+          </thead>
+          <tbody id="compMetricsBody">
+            <tr><td colspan="6" class="table-loading">Select two runs to compare.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Side-by-Side Timeline Alignment -->
+      <div class="compare-split">
+        <div class="compare-col">
+          <h4 id="compTitleA">Run A Timeline</h4>
+          <div class="timeline" id="compTimelineA"></div>
+        </div>
+        <div class="compare-col">
+          <h4 id="compTitleB">Run B Timeline</h4>
+          <div class="timeline" id="compTimelineB"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =================================================================== -->
+  <!-- MODAL: RUN SIMULATION -->
+  <!-- =================================================================== -->
+  <div class="modal-backdrop" id="runModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Launch Evaluation Simulation</h3>
+        <button class="modal-close" id="btnCloseRunModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Target Healthcare Scenario:</label>
+          <select id="modalScenarioSelect" class="select-input"></select>
+          <p class="field-hint" id="modalScenarioDesc"></p>
+        </div>
+
+        <div class="form-group">
+          <label>Voice Agent Version / Stub:</label>
+          <select id="modalAgentSelect" class="select-input">
+            <option value="llm:v1">LLM Agent v1 (Standard Baseline Prompt)</option>
+            <option value="llm:v2">LLM Agent v2 (With Read-Back Instruction)</option>
+            <option value="stub:oracle">Stub Agent: Oracle (Answer Key - Should 100% Pass)</option>
+            <option value="stub:naive">Stub Agent: Naive (Flawed - Trusts Writes & Fabricates)</option>
+            <option value="stub:panicky">Stub Agent: Panicky (Panics & Over-Escalates)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Execution Mode:</label>
+          <select id="modalModeSelect" class="select-input">
+            <option value="replay" selected>Replay Mode (Deterministic, Zero API Key, Instant)</option>
+            <option value="live">Live LLM Mode (Uses OpenAI API Key from .env)</option>
+          </select>
+          <p class="field-hint">Replay mode uses committed prompt cache to reproduce exact byte-stable turns.</p>
+        </div>
+
+        <div class="form-group">
+          <label>Random Seed:</label>
+          <input type="number" id="modalSeed" class="text-input" value="0">
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btnCancelRunModal">Cancel</button>
+        <button class="btn btn-primary" id="btnExecuteRun">
+          <span id="btnExecuteText">Start Simulation & Evaluate</span>
+          <span class="spinner hidden" id="btnExecuteSpinner"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/app.js" type="module"></script>
+</body>
+</html>

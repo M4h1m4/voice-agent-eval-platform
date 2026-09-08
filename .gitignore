@@ -1,0 +1,15 @@
+node_modules/
+.env
+*.tmp
+
+# Scratch and editor noise
+.DS_Store
+*.log
+
+# Internal working notes — not part of the submission
+decisions.md
+handoff.md
+build-plan.md
+5-7.md
+DOC-BRIEF.md
+Kyron_FullStack_Takehome_Evaluation_Platform*.md

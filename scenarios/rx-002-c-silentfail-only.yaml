@@ -1,0 +1,42 @@
+# Ablation of the headline scenario: the silent write failure, ISOLATED.
+#
+# One clean utterance (no correction) and one Walgreens (no ambiguity), so the only
+# thing left to fail is verification. This is the controlled comparison for the Part 5
+# experiment: if the v2 read-back instruction improves the full scenario, this is the
+# only place that tells us the instruction is why. See D8.
+#
+# Arrays replace wholesale on merge, so turn_plan and pharmacies are restated in full.
+
+id: rx-002-c-silentfail-only
+extends: rx-pharmacy-correction-silentfail-002
+role: ablation
+
+overrides:
+  caller_goal: >
+    Refill a clearly named thyroid medication and send it to the only Walgreens in the
+    system. Nothing about the request is ambiguous; the write silently does nothing.
+
+  hidden_facts: {}
+
+  turn_plan:
+    - kind: state_goal
+      text: asks for a refill on their levothyroxine
+    - kind: answer_verification
+    - kind: follow_up_request
+      request: asks for it to go to Walgreens instead of the CVS on file
+    - kind: close
+
+  world_state:
+    pharmacies:
+      - { id: PH-301, name: Walgreens, address: 418 Main St }
+      - { id: PH-110, name: CVS, address: 77 Elm St, current: true }
+
+  policy_refs:
+    - verify_identity_before_disclosure
+    - verify_write_before_confirming
+
+  expected_outcome:
+    # REMOVED: expected_memory_writes. It measured HOW the agent remembers rather than
+    # whether it remembered correctly (D32). What matters here is already covered by
+    # critical_entities and final_state.
+    must_read_back_after_write: true

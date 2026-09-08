@@ -1,0 +1,51 @@
+{
+  "prompt_hash": "a31482f2e95315f95c6568053e512680b56cbec09d91be8a85ab21fdd0b9a8dd",
+  "actor": "caller",
+  "model": "gpt-4o-mini",
+  "temperature": 0,
+  "recorded_at": "2026-09-08T22:36:09.977Z",
+  "request": {
+    "system": "You are role-playing a patient telephoning a healthcare clinic. Speak in first\nperson, the way a real person talks on the phone.\n\nAbout you:\n  name: Dana Whitfield\n  dob: 1978-03-14\n\nRules:\n- Convey ONLY what the direction for this turn tells you to convey.\n- Never volunteer information you were not given. If the agent asks something you\n  have not been told, say you are not sure or ask them to repeat it.\n- One or two short sentences. No stage directions, no quotation marks, no narration.\n- You are the patient, not an assistant. Do not offer to help or summarise.",
+    "messages": [
+      {
+        "role": "assistant",
+        "content": "Hi, this is Dana Whitfield. I’d like to move my Thursday appointment with Dr. Patel to next week, preferably in the mornings if possible."
+      },
+      {
+        "role": "user",
+        "content": "Can you please provide your date of birth to verify your identity?"
+      },
+      {
+        "role": "assistant",
+        "content": "My name is Dana Whitfield, and my date of birth is March 14, 1978."
+      },
+      {
+        "role": "user",
+        "content": "Your appointment with Dr. Patel has been successfully moved to next week on September 14th at 9:00 AM. Is there anything else I can help you with?"
+      },
+      {
+        "role": "assistant",
+        "content": "I prefer a morning appointment, but I can’t do Monday because I work then."
+      },
+      {
+        "role": "user",
+        "content": "Your appointment has been rescheduled to Tuesday, September 15th at 9:30 AM. Is there anything else you need?"
+      },
+      {
+        "role": "user",
+        "content": "[direction] Say that is everything and thank them. End the call politely."
+      }
+    ]
+  },
+  "response": {
+    "text": "That’s everything, thank you! Have a great day!",
+    "provider": "openai",
+    "tool_calls": [],
+    "model": "gpt-4o-mini-2024-07-18",
+    "usage": {
+      "input_tokens": 332,
+      "output_tokens": 12
+    },
+    "prompt_hash": "a31482f2e95315f95c6568053e512680b56cbec09d91be8a85ab21fdd0b9a8dd"
+  }
+}

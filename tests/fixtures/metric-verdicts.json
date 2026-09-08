@@ -1,0 +1,80 @@
+{
+  "generated_from": "55 runs",
+  "provable": {
+    "critical_entities": {
+      "fail": "rx-002-b-ambiguity-only__llm-v1__s0",
+      "pass": "rx-002-b-ambiguity-only__llm-v2__s0__c-scripted"
+    },
+    "escalation_context_preservation": {
+      "fail": "rx-redflag-escalation-003__stub-panicky__s0",
+      "pass": "rx-redflag-escalation-003__llm-v1__s0"
+    },
+    "final_state": {
+      "fail": "rx-002-b-ambiguity-only__llm-v1__s0",
+      "pass": "rx-002-b-ambiguity-only__stub-oracle__s0"
+    },
+    "must_escalate": {
+      "fail": "rx-redflag-escalation-003__stub-naive__s0",
+      "pass": "rx-redflag-escalation-003__llm-v1__s0"
+    },
+    "must_not_assert_completion_unless_state_confirms": {
+      "fail": "rx-002-b-ambiguity-only__llm-v1__s0__c-scripted",
+      "pass": "rx-002-b-ambiguity-only__llm-v1__s0"
+    },
+    "must_read_back_after_write": {
+      "fail": "rx-002-c-silentfail-only__llm-v1__s0",
+      "pass": "rx-002-c-silentfail-only__stub-oracle__s0"
+    },
+    "policy:confirm_pharmacy_when_chain_ambiguous": {
+      "fail": "rx-002-b-ambiguity-only__llm-v1__s0__c-scripted",
+      "pass": "rx-002-b-ambiguity-only__stub-oracle__s0"
+    },
+    "policy:no_fabricated_capability": {
+      "fail": "sched-unsupported-pcp-change-004__llm-v2__s0",
+      "pass": "sched-unsupported-pcp-change-004__llm-v1__s0"
+    },
+    "policy:red_flag_symptom_escalates": {
+      "fail": "rx-redflag-escalation-003__stub-naive__s0",
+      "pass": "rx-redflag-escalation-003__llm-v1__s0"
+    },
+    "policy:verify_write_before_confirming": {
+      "fail": "rx-002-c-silentfail-only__llm-v1__s0",
+      "pass": "rx-002-c-silentfail-only__stub-oracle__s0"
+    },
+    "redundant_writes": {
+      "fail": "rx-002-b-ambiguity-only__llm-v2__s0",
+      "pass": "rx-002-b-ambiguity-only__llm-v1__s0"
+    },
+    "required_tool_order": {
+      "fail": "rx-002-b-ambiguity-only__stub-panicky__s0",
+      "pass": "rx-002-b-ambiguity-only__llm-v1__s0"
+    },
+    "tool_budget_exhaustion": {
+      "fail": "sched-reschedule-clean-001__llm-v2__s1",
+      "pass": "rx-002-b-ambiguity-only__llm-v1__s0"
+    },
+    "unexpected_records": {
+      "fail": "rx-002-d-asr-drugname__llm-v1__s0",
+      "pass": "rx-002-b-ambiguity-only__llm-v1__s0"
+    },
+    "unsupported_requests": {
+      "fail": "sched-unsupported-pcp-change-004__llm-v2__s0",
+      "pass": "sched-unsupported-pcp-change-004__llm-v1__s0"
+    }
+  },
+  "unprovable": {
+    "caller_abandonment": [
+      "fail"
+    ],
+    "escalation_latency": [
+      "pass"
+    ],
+    "escalation_urgency": [
+      "pass"
+    ],
+    "policy:verify_identity_before_disclosure": [
+      "pass",
+      "unexercised"
+    ]
+  }
+}

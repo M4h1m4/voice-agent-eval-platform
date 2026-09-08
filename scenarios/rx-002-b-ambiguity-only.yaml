@@ -1,0 +1,47 @@
+# Ablation of the headline scenario: the same-chain ambiguity, ISOLATED.
+#
+# Built because the live run gave a concrete reason. On the first real agent,
+# rx-pharmacy-correction-silentfail-002 never reached its pharmacy trap — the agent
+# declined the request and escalated instead, so pharmacies.search was never called and
+# we learned nothing about disambiguation. rx-002-c had already shown the same masking
+# in the other direction, which is exactly D8's argument arriving from live data.
+#
+# One clean utterance (no correction) and a working tool (no fault), so the only thing
+# left to get wrong is picking a pharmacy without asking which one.
+#
+# Note the order in world_state.pharmacies: the WRONG Walgreens is listed first, so an
+# agent that takes the first search result fails. Guessing still passes half the time —
+# only the process check (was there a clarifying question between search and write)
+# catches a lucky guess. See D16.
+
+id: rx-002-b-ambiguity-only
+extends: rx-pharmacy-correction-silentfail-002
+role: ablation
+
+overrides:
+  caller_goal: >
+    Refill a clearly named thyroid medication and move it to a Walgreens, without
+    knowing that two Walgreens locations exist in the system. Nothing else is wrong:
+    no correction, no tool failure.
+
+  turn_plan:
+    - kind: state_goal
+      text: asks for a refill on their levothyroxine
+    - kind: answer_verification
+    - kind: follow_up_request
+      request: asks for it to go to a Walgreens instead of the CVS on file
+    - kind: reveal_if_asked
+      fact: which_walgreens
+      note: >
+        The only trap left. An agent that picks a location without asking gets no
+        correction, and its transcript reads flawless.
+    - kind: close
+
+  tool_faults: []
+
+  policy_refs:
+    - verify_identity_before_disclosure
+    - confirm_pharmacy_when_chain_ambiguous
+
+  expected_outcome:
+    must_read_back_after_write: false

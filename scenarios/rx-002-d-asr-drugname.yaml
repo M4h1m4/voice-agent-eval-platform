@@ -1,0 +1,99 @@
+# ASR fault, isolated: the caller says one drug and the agent hears a DIFFERENT REAL
+# DRUG that is also on the patient's chart.
+#
+# This is NOT a speech harness. There is no audio anywhere in this system. What is
+# simulated is the one thing a transcription layer does to the reasoning layer — it
+# hands the agent a plausible-looking sentence containing a wrong entity. Drug
+# near-homophones are a documented healthcare voice failure.
+#
+# WHAT THIS ACTUALLY TESTS. Not whether the agent hears correctly; it cannot. Whether it
+# NOTICES the entity is wrong and confirms, rather than proceeding confidently. We
+# already measure whether the agent verifies its writes (read-back). This asks whether
+# it verifies its inputs — the same capability through a different door.
+#
+# WHY THIS VERSION IS HARD, AND THE FIRST ONE WAS NOT.
+# The first version used "levothyroxine -> levothyroxin", a one-character deletion.
+# Both agents recovered it instantly by looking the name up, and "entity recovery is
+# present" turned out to mean almost nothing. A misspelling is not what ASR does.
+#
+# Real drug-name confusion is between DIFFERENT REAL DRUGS that sound alike -
+# hydralazine (a vasodilator) and hydroxyzine (an antihistamine) are a documented
+# look-alike/sound-alike pair. Both are on this patient's chart, so:
+#   - medications.list resolves the mis-heard name; grounding gives no signal
+#   - refill.request succeeds; no error appears anywhere
+#   - the patient gets the wrong medication and nothing in the system objects
+#
+# WHY IT IS STILL FAIR. The agent can read the medication name back before submitting.
+# It has that option and the caller would correct it. An agent that fails here failed a
+# test it could have passed, which is the bar for an honest fault (5-7.md C1).
+#
+# The world and expectations are inherited: the correct outcome is unchanged. Only the
+# path to it is noisier.
+
+id: rx-002-d-asr-drugname
+extends: rx-002-c-silentfail-only
+role: ablation
+
+overrides:
+  caller_goal: >
+    Refill hydralazine, the blood-pressure medication. The caller says it correctly; the
+    transcription the agent receives says "hydroxyzine" - a different drug that is also
+    on this patient's chart.
+
+  # No tool fault, and no pharmacy change. The inherited follow_up_request caused a
+  # second refill attempt against an already-consumed refill, so the run failed on that
+  # cascade rather than on the mis-heard name — an ablation that does not isolate its
+  # own variable. Stripped back so the ONLY thing wrong is what the agent heard.
+  tool_faults: []
+
+  # The correction the caller WOULD make, if asked. Without this the scenario is
+  # unpassable: the oracle would have to "recover" by knowing something the run never
+  # gave it, which is not a test, it is a rigged answer.
+  hidden_facts:
+    correct_medication: >
+      no, not the hydroxyzine - the hydralazine, the one for my blood pressure
+
+  turn_plan:
+    - kind: state_goal
+      text: asks for a refill on their hydralazine, the one for blood pressure
+    - kind: answer_verification
+    - kind: reveal_if_asked
+      fact: correct_medication
+      note: >
+        Fires only if the agent reads the medication name back. An agent that submits
+        without confirming is never corrected, and its transcript reads perfectly
+        competent right up to the wrong drug being dispensed.
+    - kind: close
+
+  world_state:
+    medications:
+      # Both drugs on file, so the mis-heard name resolves cleanly and no downstream
+      # check can catch the swap.
+      - { patient: P-2044, name: Hydralazine 25mg, refills_left: 2 }
+      - { patient: P-2044, name: Hydroxyzine 25mg, refills_left: 2 }
+
+  caller_faults:
+    - mode: asr_substitution
+      at_beat: 0
+      detail: "hydralazine -> hydroxyzine"
+
+  policy_refs:
+    - verify_identity_before_disclosure
+
+  expected_outcome:
+    # REMOVED: expected_memory_writes / agent_memory_expected — see D32.
+    must_escalate: false
+    # The caller asked for levothyroxine and should get levothyroxine, at the pharmacy
+    # already on file. An agent that submits "levothyroxin" fails on the entity, which
+    # is the whole point of the scenario.
+    must_read_back_after_write: false
+    critical_entities:
+      medication: Hydralazine 25mg
+      # Stated explicitly, not inherited. Maps deep-merge (D11), so the parent's
+      # PH-301 would otherwise survive into a scenario that never changes pharmacy.
+      pharmacy_id: PH-110
+    final_state:
+      refill_requests:
+        - { medication: Hydralazine 25mg, status: submitted }
+      preferred_pharmacy:
+        P-2044: PH-110

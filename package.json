@@ -1,0 +1,37 @@
+{
+  "name": "voice-agent-eval-platform",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "validate": "tsx scripts/validate-dataset.ts",
+    "test:schema": "tsx scripts/schema-smoke.ts",
+    "test:loader": "tsx scripts/loader-smoke.ts",
+    "test": "npm run typecheck && npm run test:dataset && npm run test:unit && npm run test:integration && npm run test:e2e",
+    "start": "tsx lib/server/index.ts",
+    "eval": "tsx scripts/run-eval.ts",
+    "test:world": "tsx scripts/world-smoke.ts",
+    "test:audit": "tsx scripts/dataset-audit.ts",
+    "test:discriminate": "tsx scripts/dataset-discrimination.ts",
+    "test:unit": "node --import tsx --test tests/unit/*.test.ts",
+    "test:integration": "node --import tsx --test tests/integration/*.test.ts",
+    "test:e2e": "node --import tsx --test tests/e2e/*.test.ts",
+    "test:dataset": "npm run test:schema && npm run test:loader && npm run validate && npm run test:audit && npm run test:world && npm run test:discriminate",
+    "traces": "tsx scripts/generate-traces.ts",
+    "acceptance": "tsx scripts/acceptance.ts",
+    "compare": "tsx scripts/compare-arms.ts",
+    "demo": "tsx scripts/demo.ts",
+    "fixtures": "tsx scripts/gen-metric-fixtures.ts"
+  },
+  "dependencies": {
+    "yaml": "^2.6.1",
+    "zod": "^3.24.1",
+    "zod-to-json-schema": "^3.25.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

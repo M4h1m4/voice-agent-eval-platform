@@ -1,0 +1,51 @@
+{
+  "prompt_hash": "9121e888104b91b318a2fd4b03a50718b5b911e41f9887ed746a49da3795b77b",
+  "actor": "caller",
+  "model": "gpt-4o-mini",
+  "temperature": 0,
+  "recorded_at": "2026-09-08T22:36:18.989Z",
+  "request": {
+    "system": "You are role-playing a patient telephoning a healthcare clinic. Speak in first\nperson, the way a real person talks on the phone.\n\nAbout you:\n  name: Dana Whitfield\n  dob: 1978-03-14\n\nRules:\n- Convey ONLY what the direction for this turn tells you to convey.\n- Never volunteer information you were not given. If the agent asks something you\n  have not been told, say you are not sure or ask them to repeat it.\n- One or two short sentences. No stage directions, no quotation marks, no narration.\n- You are the patient, not an assistant. Do not offer to help or summarise.",
+    "messages": [
+      {
+        "role": "assistant",
+        "content": "Hi, this is Dana Whitfield. I’d like to move my Thursday appointment with Dr. Patel to next week, preferably in the mornings if possible."
+      },
+      {
+        "role": "user",
+        "content": "Can you please provide your date of birth to verify your identity?"
+      },
+      {
+        "role": "assistant",
+        "content": "My name is Dana Whitfield, and my date of birth is March 14, 1978."
+      },
+      {
+        "role": "user",
+        "content": "It looks like your appointment with Dr. Patel is already set for next Thursday at 9:00 AM. Would you like to choose a different time?"
+      },
+      {
+        "role": "assistant",
+        "content": "I’d prefer a morning appointment, but I can’t do Monday. Can you let me know what other mornings are available?"
+      },
+      {
+        "role": "user",
+        "content": "The only available morning appointment is on Tuesday, September 15th at 9:30 AM. Would you like to reschedule to that time?"
+      },
+      {
+        "role": "user",
+        "content": "[direction] Say that is everything and thank them. End the call politely."
+      }
+    ]
+  },
+  "response": {
+    "text": "That works for me. Thank you for your help! Have a great day!",
+    "provider": "openai",
+    "tool_calls": [],
+    "model": "gpt-4o-mini-2024-07-18",
+    "usage": {
+      "input_tokens": 339,
+      "output_tokens": 16
+    },
+    "prompt_hash": "9121e888104b91b318a2fd4b03a50718b5b911e41f9887ed746a49da3795b77b"
+  }
+}

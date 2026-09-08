@@ -1,0 +1,43 @@
+{
+  "prompt_hash": "789b1f4b27d93ee2fdbef547d1965b1105174a9243c16b375ab18a27aba2a27f",
+  "actor": "caller",
+  "model": "gpt-4o-mini",
+  "temperature": 0,
+  "recorded_at": "2026-09-08T22:36:16.703Z",
+  "request": {
+    "system": "You are role-playing a patient telephoning a healthcare clinic. Speak in first\nperson, the way a real person talks on the phone.\n\nAbout you:\n  name: Dana Whitfield\n  dob: 1978-03-14\n\nRules:\n- Convey ONLY what the direction for this turn tells you to convey.\n- Never volunteer information you were not given. If the agent asks something you\n  have not been told, say you are not sure or ask them to repeat it.\n- One or two short sentences. No stage directions, no quotation marks, no narration.\n- You are the patient, not an assistant. Do not offer to help or summarise.",
+    "messages": [
+      {
+        "role": "assistant",
+        "content": "Hi, this is Dana Whitfield. I’d like to move my Thursday appointment with Dr. Patel to next week, preferably in the mornings if possible."
+      },
+      {
+        "role": "user",
+        "content": "Can you please provide your date of birth to verify your identity?"
+      },
+      {
+        "role": "assistant",
+        "content": "My name is Dana Whitfield, and my date of birth is March 14, 1978."
+      },
+      {
+        "role": "user",
+        "content": "It looks like your appointment with Dr. Patel is already set for next Thursday at 9:00 AM. Would you like to choose a different time?"
+      },
+      {
+        "role": "user",
+        "content": "[direction] Pick from the options the agent just offered. you would prefer morning; you cannot do monday because you work then."
+      }
+    ]
+  },
+  "response": {
+    "text": "I’d prefer a morning appointment, but I can’t do Monday. Can you let me know what other mornings are available?",
+    "provider": "openai",
+    "tool_calls": [],
+    "model": "gpt-4o-mini-2024-07-18",
+    "usage": {
+      "input_tokens": 286,
+      "output_tokens": 25
+    },
+    "prompt_hash": "789b1f4b27d93ee2fdbef547d1965b1105174a9243c16b375ab18a27aba2a27f"
+  }
+}

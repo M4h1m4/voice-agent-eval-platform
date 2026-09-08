@@ -1,0 +1,1301 @@
+{
+  "run_id": "sched-reschedule-clean-001__llm-v2__s2",
+  "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+  "scenario_id": "sched-reschedule-clean-001",
+  "agent_version": "llm-v2",
+  "seed": 2,
+  "caller": "llm",
+  "limits": {
+    "maxTurns": 20,
+    "maxToolCallsPerTurn": 8,
+    "maxToolCallsTotal": 40
+  },
+  "mode": "live",
+  "started_at": 1788858000000,
+  "ended_at": 1788858005000,
+  "termination": "max_tool_calls",
+  "initial_state": {
+    "patients": [
+      {
+        "id": "P-1001",
+        "name": "Dana Whitfield",
+        "dob": "1978-03-14",
+        "phone": "555-0142"
+      }
+    ],
+    "appointments": [
+      {
+        "id": "A-5501",
+        "patient": "P-1001",
+        "provider": "Dr. Patel",
+        "start": "2026-09-10T14:00",
+        "status": "booked"
+      }
+    ],
+    "availability": [
+      {
+        "provider": "Dr. Patel",
+        "start": "2026-09-14T09:00"
+      },
+      {
+        "provider": "Dr. Patel",
+        "start": "2026-09-15T09:30"
+      },
+      {
+        "provider": "Dr. Patel",
+        "start": "2026-09-15T15:00"
+      }
+    ],
+    "medications": [],
+    "pharmacies": [],
+    "refill_requests": [],
+    "escalations": [],
+    "preferred_pharmacy": {}
+  },
+  "final_state": {
+    "patients": [
+      {
+        "id": "P-1001",
+        "name": "Dana Whitfield",
+        "dob": "1978-03-14",
+        "phone": "555-0142"
+      }
+    ],
+    "appointments": [
+      {
+        "id": "A-5501",
+        "patient": "P-1001",
+        "provider": "Dr. Patel",
+        "start": "2026-09-14T09:00",
+        "status": "booked"
+      }
+    ],
+    "availability": [
+      {
+        "provider": "Dr. Patel",
+        "start": "2026-09-10T14:00"
+      },
+      {
+        "provider": "Dr. Patel",
+        "start": "2026-09-15T09:30"
+      },
+      {
+        "provider": "Dr. Patel",
+        "start": "2026-09-15T15:00"
+      }
+    ],
+    "medications": [],
+    "pharmacies": [],
+    "refill_requests": [],
+    "escalations": [],
+    "preferred_pharmacy": {}
+  },
+  "final_memory": {},
+  "events": [
+    {
+      "type": "llm_call",
+      "actor": "caller",
+      "gen_ai.system": "openai",
+      "gen_ai.request.model": "gpt-4o-mini-2024-07-18",
+      "gen_ai.request.temperature": 0,
+      "gen_ai.usage.input_tokens": 180,
+      "gen_ai.usage.output_tokens": 31,
+      "prompt_hash": "02781fae9f65fa9f8e580d40ce79fb7a29a7928bab7800bc14963722529c8676",
+      "cache_hit": true,
+      "id": "e0000",
+      "seq": 0,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "5418e2e8c14750ff",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858000000,
+      "end_time": 1788858000000,
+      "status": "OK"
+    },
+    {
+      "type": "caller_turn",
+      "text": "Hi, this is Dana Whitfield. I’d like to move my Thursday appointment with Dr. Patel to next week, preferably in the mornings if possible.",
+      "beat_kind": "state_goal",
+      "beat_index": 0,
+      "id": "e0001",
+      "seq": 1,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "a84b5164ab772f32",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858000000,
+      "end_time": 1788858000250,
+      "status": "OK"
+    },
+    {
+      "type": "llm_call",
+      "actor": "agent",
+      "gen_ai.system": "openai",
+      "gen_ai.request.model": "gpt-4o-mini-2024-07-18",
+      "gen_ai.request.temperature": 0,
+      "gen_ai.usage.input_tokens": 846,
+      "gen_ai.usage.output_tokens": 19,
+      "prompt_hash": "68e0e1af0770e480b06d6502dcacec132f6b90339880f9dd85ad0692f3e5745a",
+      "cache_hit": false,
+      "id": "e0002",
+      "seq": 2,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "542832c66e3661bd",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858000250,
+      "end_time": 1788858000250,
+      "status": "OK"
+    },
+    {
+      "type": "agent_message",
+      "text": "I can help with that, but first, can you please provide your date of birth?",
+      "id": "e0003",
+      "seq": 3,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "3df856da81ee9736",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858000250,
+      "end_time": 1788858000500,
+      "status": "OK"
+    },
+    {
+      "type": "llm_call",
+      "actor": "caller",
+      "gen_ai.system": "openai",
+      "gen_ai.request.model": "gpt-4o-mini-2024-07-18",
+      "gen_ai.request.temperature": 0,
+      "gen_ai.usage.input_tokens": 219,
+      "gen_ai.usage.output_tokens": 21,
+      "prompt_hash": "813f7a89212501c90cddaf2e17dcbcb51f6f4679ebab612458eaeed95627709a",
+      "cache_hit": false,
+      "id": "e0004",
+      "seq": 4,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "5e23e71e10665baf",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858000500,
+      "end_time": 1788858000500,
+      "status": "OK"
+    },
+    {
+      "type": "caller_turn",
+      "text": "My name is Dana Whitfield, and my date of birth is March 14, 1978.",
+      "beat_kind": "answer_verification",
+      "beat_index": 1,
+      "id": "e0005",
+      "seq": 5,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "f67ed6cb226c5e4d",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858000500,
+      "end_time": 1788858000750,
+      "status": "OK"
+    },
+    {
+      "type": "llm_call",
+      "actor": "agent",
+      "gen_ai.system": "openai",
+      "gen_ai.request.model": "gpt-4o-mini-2024-07-18",
+      "gen_ai.request.temperature": 0,
+      "gen_ai.usage.input_tokens": 893,
+      "gen_ai.usage.output_tokens": 28,
+      "prompt_hash": "1404b0af3f04febdd79c6cdd98eb7f0ae1d6261c33eb5f00895b3cdc6c7788e2",
+      "cache_hit": false,
+      "id": "e0006",
+      "seq": 6,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "2574d30896ce6f1d",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858000750,
+      "end_time": 1788858000750,
+      "status": "OK"
+    },
+    {
+      "type": "tool_call",
+      "tool": "patients.verify",
+      "args": {
+        "name": "Dana Whitfield",
+        "dob": "1978-03-14"
+      },
+      "id": "e0007",
+      "seq": 7,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "acb1d8b84efe9d10",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858000750,
+      "end_time": 1788858001000,
+      "status": "OK"
+    },
+    {
+      "type": "tool_result",
+      "tool": "patients.verify",
+      "ok": true,
+      "data": {
+        "patient_id": "P-1001",
+        "name": "Dana Whitfield",
+        "verified": true
+      },
+      "fault_applied": null,
+      "state_before": {
+        "patients": [
+          {
+            "id": "P-1001",
+            "name": "Dana Whitfield",
+            "dob": "1978-03-14",
+            "phone": "555-0142"
+          }
+        ],
+        "appointments": [
+          {
+            "id": "A-5501",
+            "patient": "P-1001",
+            "provider": "Dr. Patel",
+            "start": "2026-09-10T14:00",
+            "status": "booked"
+          }
+        ],
+        "availability": [
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-14T09:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T09:30"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T15:00"
+          }
+        ],
+        "medications": [],
+        "pharmacies": [],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {}
+      },
+      "state_after": {
+        "patients": [
+          {
+            "id": "P-1001",
+            "name": "Dana Whitfield",
+            "dob": "1978-03-14",
+            "phone": "555-0142"
+          }
+        ],
+        "appointments": [
+          {
+            "id": "A-5501",
+            "patient": "P-1001",
+            "provider": "Dr. Patel",
+            "start": "2026-09-10T14:00",
+            "status": "booked"
+          }
+        ],
+        "availability": [
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-14T09:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T09:30"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T15:00"
+          }
+        ],
+        "medications": [],
+        "pharmacies": [],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {}
+      },
+      "id": "e0008",
+      "seq": 8,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "81af6c8118e9abf1",
+      "parent_span_id": "acb1d8b84efe9d10",
+      "start_time": 1788858001000,
+      "end_time": 1788858001250,
+      "status": "OK"
+    },
+    {
+      "type": "llm_call",
+      "actor": "agent",
+      "gen_ai.system": "openai",
+      "gen_ai.request.model": "gpt-4o-mini-2024-07-18",
+      "gen_ai.request.temperature": 0,
+      "gen_ai.usage.input_tokens": 955,
+      "gen_ai.usage.output_tokens": 20,
+      "prompt_hash": "d376f7b829d9690ede4824e3357f92957f9bc42e745632d06a0256741c962f35",
+      "cache_hit": false,
+      "id": "e0009",
+      "seq": 9,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "6815af1935372892",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858001250,
+      "end_time": 1788858001250,
+      "status": "OK"
+    },
+    {
+      "type": "tool_call",
+      "tool": "appointments.list",
+      "args": {
+        "patient_id": "P-1001"
+      },
+      "id": "e0010",
+      "seq": 10,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "02f18c5a7c42879a",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858001250,
+      "end_time": 1788858001500,
+      "status": "OK"
+    },
+    {
+      "type": "tool_result",
+      "tool": "appointments.list",
+      "ok": true,
+      "data": {
+        "appointments": [
+          {
+            "id": "A-5501",
+            "patient": "P-1001",
+            "provider": "Dr. Patel",
+            "start": "2026-09-14T09:00",
+            "status": "booked"
+          }
+        ]
+      },
+      "fault_applied": null,
+      "state_before": {
+        "patients": [
+          {
+            "id": "P-1001",
+            "name": "Dana Whitfield",
+            "dob": "1978-03-14",
+            "phone": "555-0142"
+          }
+        ],
+        "appointments": [
+          {
+            "id": "A-5501",
+            "patient": "P-1001",
+            "provider": "Dr. Patel",
+            "start": "2026-09-10T14:00",
+            "status": "booked"
+          }
+        ],
+        "availability": [
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-14T09:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T09:30"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T15:00"
+          }
+        ],
+        "medications": [],
+        "pharmacies": [],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {}
+      },
+      "state_after": {
+        "patients": [
+          {
+            "id": "P-1001",
+            "name": "Dana Whitfield",
+            "dob": "1978-03-14",
+            "phone": "555-0142"
+          }
+        ],
+        "appointments": [
+          {
+            "id": "A-5501",
+            "patient": "P-1001",
+            "provider": "Dr. Patel",
+            "start": "2026-09-10T14:00",
+            "status": "booked"
+          }
+        ],
+        "availability": [
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-14T09:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T09:30"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T15:00"
+          }
+        ],
+        "medications": [],
+        "pharmacies": [],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {}
+      },
+      "id": "e0011",
+      "seq": 11,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "13190906ba7bd575",
+      "parent_span_id": "02f18c5a7c42879a",
+      "start_time": 1788858001500,
+      "end_time": 1788858001750,
+      "status": "OK"
+    },
+    {
+      "type": "llm_call",
+      "actor": "agent",
+      "gen_ai.system": "openai",
+      "gen_ai.request.model": "gpt-4o-mini-2024-07-18",
+      "gen_ai.request.temperature": 0,
+      "gen_ai.usage.input_tokens": 1034,
+      "gen_ai.usage.output_tokens": 31,
+      "prompt_hash": "b6aeb26a79a937587705e30b1622b6743c1835936c1771db4335fccc9ccc7a1b",
+      "cache_hit": false,
+      "id": "e0012",
+      "seq": 12,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "f516e0a9de0ef939",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858001750,
+      "end_time": 1788858001750,
+      "status": "OK"
+    },
+    {
+      "type": "tool_call",
+      "tool": "availability.search",
+      "args": {
+        "provider": "Dr. Patel",
+        "after": "2026-09-11T00:00"
+      },
+      "id": "e0013",
+      "seq": 13,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "4d514edf559eceb4",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858001750,
+      "end_time": 1788858002000,
+      "status": "OK"
+    },
+    {
+      "type": "tool_result",
+      "tool": "availability.search",
+      "ok": true,
+      "data": {
+        "slots": [
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-14T09:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T09:30"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T15:00"
+          }
+        ]
+      },
+      "fault_applied": null,
+      "state_before": {
+        "patients": [
+          {
+            "id": "P-1001",
+            "name": "Dana Whitfield",
+            "dob": "1978-03-14",
+            "phone": "555-0142"
+          }
+        ],
+        "appointments": [
+          {
+            "id": "A-5501",
+            "patient": "P-1001",
+            "provider": "Dr. Patel",
+            "start": "2026-09-10T14:00",
+            "status": "booked"
+          }
+        ],
+        "availability": [
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-14T09:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T09:30"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T15:00"
+          }
+        ],
+        "medications": [],
+        "pharmacies": [],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {}
+      },
+      "state_after": {
+        "patients": [
+          {
+            "id": "P-1001",
+            "name": "Dana Whitfield",
+            "dob": "1978-03-14",
+            "phone": "555-0142"
+          }
+        ],
+        "appointments": [
+          {
+            "id": "A-5501",
+            "patient": "P-1001",
+            "provider": "Dr. Patel",
+            "start": "2026-09-10T14:00",
+            "status": "booked"
+          }
+        ],
+        "availability": [
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-14T09:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T09:30"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T15:00"
+          }
+        ],
+        "medications": [],
+        "pharmacies": [],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {}
+      },
+      "id": "e0014",
+      "seq": 14,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "a7391c50923e7806",
+      "parent_span_id": "4d514edf559eceb4",
+      "start_time": 1788858002000,
+      "end_time": 1788858002250,
+      "status": "OK"
+    },
+    {
+      "type": "llm_call",
+      "actor": "agent",
+      "gen_ai.system": "openai",
+      "gen_ai.request.model": "gpt-4o-mini-2024-07-18",
+      "gen_ai.request.temperature": 0,
+      "gen_ai.usage.input_tokens": 1143,
+      "gen_ai.usage.output_tokens": 35,
+      "prompt_hash": "e9cf7da974bd96467d7423ecc7d2ec2fa944d7558c4838fcdfbd4d04605614a2",
+      "cache_hit": false,
+      "id": "e0015",
+      "seq": 15,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "051c5b497b04175b",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858002250,
+      "end_time": 1788858002250,
+      "status": "OK"
+    },
+    {
+      "type": "tool_call",
+      "tool": "appointments.reschedule",
+      "args": {
+        "appointment_id": "A-5501",
+        "new_start": "2026-09-14T09:00"
+      },
+      "id": "e0016",
+      "seq": 16,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "0b2767abc1fb1a10",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858002250,
+      "end_time": 1788858002500,
+      "status": "OK"
+    },
+    {
+      "type": "tool_result",
+      "tool": "appointments.reschedule",
+      "ok": true,
+      "data": {
+        "appointment": {
+          "id": "A-5501",
+          "patient": "P-1001",
+          "provider": "Dr. Patel",
+          "start": "2026-09-14T09:00",
+          "status": "booked"
+        }
+      },
+      "fault_applied": null,
+      "state_before": {
+        "patients": [
+          {
+            "id": "P-1001",
+            "name": "Dana Whitfield",
+            "dob": "1978-03-14",
+            "phone": "555-0142"
+          }
+        ],
+        "appointments": [
+          {
+            "id": "A-5501",
+            "patient": "P-1001",
+            "provider": "Dr. Patel",
+            "start": "2026-09-10T14:00",
+            "status": "booked"
+          }
+        ],
+        "availability": [
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-14T09:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T09:30"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T15:00"
+          }
+        ],
+        "medications": [],
+        "pharmacies": [],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {}
+      },
+      "state_after": {
+        "patients": [
+          {
+            "id": "P-1001",
+            "name": "Dana Whitfield",
+            "dob": "1978-03-14",
+            "phone": "555-0142"
+          }
+        ],
+        "appointments": [
+          {
+            "id": "A-5501",
+            "patient": "P-1001",
+            "provider": "Dr. Patel",
+            "start": "2026-09-14T09:00",
+            "status": "booked"
+          }
+        ],
+        "availability": [
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-10T14:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T09:30"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T15:00"
+          }
+        ],
+        "medications": [],
+        "pharmacies": [],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {}
+      },
+      "id": "e0017",
+      "seq": 17,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "71cc0e2b5005f57c",
+      "parent_span_id": "0b2767abc1fb1a10",
+      "start_time": 1788858002500,
+      "end_time": 1788858002750,
+      "status": "OK"
+    },
+    {
+      "type": "llm_call",
+      "actor": "agent",
+      "gen_ai.system": "openai",
+      "gen_ai.request.model": "gpt-4o-mini-2024-07-18",
+      "gen_ai.request.temperature": 0,
+      "gen_ai.usage.input_tokens": 1236,
+      "gen_ai.usage.output_tokens": 35,
+      "prompt_hash": "5b967b1f8bcf423d52a122519b1fe1adb17e4f05fbfe91686c74409f48d75341",
+      "cache_hit": false,
+      "id": "e0018",
+      "seq": 18,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "01e486bac53f7016",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858002750,
+      "end_time": 1788858002750,
+      "status": "OK"
+    },
+    {
+      "type": "tool_call",
+      "tool": "appointments.reschedule",
+      "args": {
+        "appointment_id": "A-5501",
+        "new_start": "2026-09-15T09:30"
+      },
+      "id": "e0019",
+      "seq": 19,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "8c2bec4776b33e1e",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858002750,
+      "end_time": 1788858003000,
+      "status": "OK"
+    },
+    {
+      "type": "tool_result",
+      "tool": "appointments.reschedule",
+      "ok": true,
+      "data": {
+        "appointment": {
+          "id": "A-5501",
+          "patient": "P-1001",
+          "provider": "Dr. Patel",
+          "start": "2026-09-15T09:30",
+          "status": "booked"
+        }
+      },
+      "fault_applied": null,
+      "state_before": {
+        "patients": [
+          {
+            "id": "P-1001",
+            "name": "Dana Whitfield",
+            "dob": "1978-03-14",
+            "phone": "555-0142"
+          }
+        ],
+        "appointments": [
+          {
+            "id": "A-5501",
+            "patient": "P-1001",
+            "provider": "Dr. Patel",
+            "start": "2026-09-14T09:00",
+            "status": "booked"
+          }
+        ],
+        "availability": [
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-10T14:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T09:30"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T15:00"
+          }
+        ],
+        "medications": [],
+        "pharmacies": [],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {}
+      },
+      "state_after": {
+        "patients": [
+          {
+            "id": "P-1001",
+            "name": "Dana Whitfield",
+            "dob": "1978-03-14",
+            "phone": "555-0142"
+          }
+        ],
+        "appointments": [
+          {
+            "id": "A-5501",
+            "patient": "P-1001",
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T09:30",
+            "status": "booked"
+          }
+        ],
+        "availability": [
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-10T14:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-14T09:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T15:00"
+          }
+        ],
+        "medications": [],
+        "pharmacies": [],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {}
+      },
+      "id": "e0020",
+      "seq": 20,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "bf1e56ac8363d71a",
+      "parent_span_id": "8c2bec4776b33e1e",
+      "start_time": 1788858003000,
+      "end_time": 1788858003250,
+      "status": "OK"
+    },
+    {
+      "type": "llm_call",
+      "actor": "agent",
+      "gen_ai.system": "openai",
+      "gen_ai.request.model": "gpt-4o-mini-2024-07-18",
+      "gen_ai.request.temperature": 0,
+      "gen_ai.usage.input_tokens": 1329,
+      "gen_ai.usage.output_tokens": 35,
+      "prompt_hash": "7cd9907a9361b332a997c84619e47bb825ab403ac2c0dc0910b0b079f271c2d5",
+      "cache_hit": false,
+      "id": "e0021",
+      "seq": 21,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "b364db9e19d8a612",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858003250,
+      "end_time": 1788858003250,
+      "status": "OK"
+    },
+    {
+      "type": "tool_call",
+      "tool": "appointments.reschedule",
+      "args": {
+        "appointment_id": "A-5501",
+        "new_start": "2026-09-14T09:00"
+      },
+      "id": "e0022",
+      "seq": 22,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "058d3277c1280b7e",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858003250,
+      "end_time": 1788858003500,
+      "status": "OK"
+    },
+    {
+      "type": "tool_result",
+      "tool": "appointments.reschedule",
+      "ok": true,
+      "data": {
+        "appointment": {
+          "id": "A-5501",
+          "patient": "P-1001",
+          "provider": "Dr. Patel",
+          "start": "2026-09-14T09:00",
+          "status": "booked"
+        }
+      },
+      "fault_applied": null,
+      "state_before": {
+        "patients": [
+          {
+            "id": "P-1001",
+            "name": "Dana Whitfield",
+            "dob": "1978-03-14",
+            "phone": "555-0142"
+          }
+        ],
+        "appointments": [
+          {
+            "id": "A-5501",
+            "patient": "P-1001",
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T09:30",
+            "status": "booked"
+          }
+        ],
+        "availability": [
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-10T14:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-14T09:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T15:00"
+          }
+        ],
+        "medications": [],
+        "pharmacies": [],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {}
+      },
+      "state_after": {
+        "patients": [
+          {
+            "id": "P-1001",
+            "name": "Dana Whitfield",
+            "dob": "1978-03-14",
+            "phone": "555-0142"
+          }
+        ],
+        "appointments": [
+          {
+            "id": "A-5501",
+            "patient": "P-1001",
+            "provider": "Dr. Patel",
+            "start": "2026-09-14T09:00",
+            "status": "booked"
+          }
+        ],
+        "availability": [
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-10T14:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T09:30"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T15:00"
+          }
+        ],
+        "medications": [],
+        "pharmacies": [],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {}
+      },
+      "id": "e0023",
+      "seq": 23,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "3bd8c8b637247375",
+      "parent_span_id": "058d3277c1280b7e",
+      "start_time": 1788858003500,
+      "end_time": 1788858003750,
+      "status": "OK"
+    },
+    {
+      "type": "llm_call",
+      "actor": "agent",
+      "gen_ai.system": "openai",
+      "gen_ai.request.model": "gpt-4o-mini-2024-07-18",
+      "gen_ai.request.temperature": 0,
+      "gen_ai.usage.input_tokens": 1422,
+      "gen_ai.usage.output_tokens": 35,
+      "prompt_hash": "0f17d3d05321794289cc3fdd0a604fe78d4b8c03500ec87962f95c1b3d657639",
+      "cache_hit": false,
+      "id": "e0024",
+      "seq": 24,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "bab651ebabc55ba6",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858003750,
+      "end_time": 1788858003750,
+      "status": "OK"
+    },
+    {
+      "type": "tool_call",
+      "tool": "appointments.reschedule",
+      "args": {
+        "appointment_id": "A-5501",
+        "new_start": "2026-09-15T09:30"
+      },
+      "id": "e0025",
+      "seq": 25,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "3ba8f2ebcdf351f9",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858003750,
+      "end_time": 1788858004000,
+      "status": "OK"
+    },
+    {
+      "type": "tool_result",
+      "tool": "appointments.reschedule",
+      "ok": true,
+      "data": {
+        "appointment": {
+          "id": "A-5501",
+          "patient": "P-1001",
+          "provider": "Dr. Patel",
+          "start": "2026-09-15T09:30",
+          "status": "booked"
+        }
+      },
+      "fault_applied": null,
+      "state_before": {
+        "patients": [
+          {
+            "id": "P-1001",
+            "name": "Dana Whitfield",
+            "dob": "1978-03-14",
+            "phone": "555-0142"
+          }
+        ],
+        "appointments": [
+          {
+            "id": "A-5501",
+            "patient": "P-1001",
+            "provider": "Dr. Patel",
+            "start": "2026-09-14T09:00",
+            "status": "booked"
+          }
+        ],
+        "availability": [
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-10T14:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T09:30"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T15:00"
+          }
+        ],
+        "medications": [],
+        "pharmacies": [],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {}
+      },
+      "state_after": {
+        "patients": [
+          {
+            "id": "P-1001",
+            "name": "Dana Whitfield",
+            "dob": "1978-03-14",
+            "phone": "555-0142"
+          }
+        ],
+        "appointments": [
+          {
+            "id": "A-5501",
+            "patient": "P-1001",
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T09:30",
+            "status": "booked"
+          }
+        ],
+        "availability": [
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-10T14:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-14T09:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T15:00"
+          }
+        ],
+        "medications": [],
+        "pharmacies": [],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {}
+      },
+      "id": "e0026",
+      "seq": 26,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "8ba6dc55bd86635b",
+      "parent_span_id": "3ba8f2ebcdf351f9",
+      "start_time": 1788858004000,
+      "end_time": 1788858004250,
+      "status": "OK"
+    },
+    {
+      "type": "llm_call",
+      "actor": "agent",
+      "gen_ai.system": "openai",
+      "gen_ai.request.model": "gpt-4o-mini-2024-07-18",
+      "gen_ai.request.temperature": 0,
+      "gen_ai.usage.input_tokens": 1515,
+      "gen_ai.usage.output_tokens": 35,
+      "prompt_hash": "e898d08154b8d00fa124e1fef1a1918efafb8721efeda2ee8d2afc6d1c2b2419",
+      "cache_hit": false,
+      "id": "e0027",
+      "seq": 27,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "3fdc8ca9c1633dd1",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858004250,
+      "end_time": 1788858004250,
+      "status": "OK"
+    },
+    {
+      "type": "tool_call",
+      "tool": "appointments.reschedule",
+      "args": {
+        "appointment_id": "A-5501",
+        "new_start": "2026-09-14T09:00"
+      },
+      "id": "e0028",
+      "seq": 28,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "07869a47708889a9",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858004250,
+      "end_time": 1788858004500,
+      "status": "OK"
+    },
+    {
+      "type": "tool_result",
+      "tool": "appointments.reschedule",
+      "ok": true,
+      "data": {
+        "appointment": {
+          "id": "A-5501",
+          "patient": "P-1001",
+          "provider": "Dr. Patel",
+          "start": "2026-09-14T09:00",
+          "status": "booked"
+        }
+      },
+      "fault_applied": null,
+      "state_before": {
+        "patients": [
+          {
+            "id": "P-1001",
+            "name": "Dana Whitfield",
+            "dob": "1978-03-14",
+            "phone": "555-0142"
+          }
+        ],
+        "appointments": [
+          {
+            "id": "A-5501",
+            "patient": "P-1001",
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T09:30",
+            "status": "booked"
+          }
+        ],
+        "availability": [
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-10T14:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-14T09:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T15:00"
+          }
+        ],
+        "medications": [],
+        "pharmacies": [],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {}
+      },
+      "state_after": {
+        "patients": [
+          {
+            "id": "P-1001",
+            "name": "Dana Whitfield",
+            "dob": "1978-03-14",
+            "phone": "555-0142"
+          }
+        ],
+        "appointments": [
+          {
+            "id": "A-5501",
+            "patient": "P-1001",
+            "provider": "Dr. Patel",
+            "start": "2026-09-14T09:00",
+            "status": "booked"
+          }
+        ],
+        "availability": [
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-10T14:00"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T09:30"
+          },
+          {
+            "provider": "Dr. Patel",
+            "start": "2026-09-15T15:00"
+          }
+        ],
+        "medications": [],
+        "pharmacies": [],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {}
+      },
+      "id": "e0029",
+      "seq": 29,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "5dd56b7236531187",
+      "parent_span_id": "07869a47708889a9",
+      "start_time": 1788858004500,
+      "end_time": 1788858004750,
+      "status": "OK"
+    },
+    {
+      "type": "llm_call",
+      "actor": "agent",
+      "gen_ai.system": "openai",
+      "gen_ai.request.model": "gpt-4o-mini-2024-07-18",
+      "gen_ai.request.temperature": 0,
+      "gen_ai.usage.input_tokens": 1608,
+      "gen_ai.usage.output_tokens": 35,
+      "prompt_hash": "1e424106d286eefb75e713e308e7684fd3242292c1ee2b8a596238d27d9056e7",
+      "cache_hit": false,
+      "id": "e0030",
+      "seq": 30,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "1a730236c65f99a0",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858004750,
+      "end_time": 1788858004750,
+      "status": "OK"
+    },
+    {
+      "type": "error",
+      "message": "tool call limit reached (turn 8/8, total 8/40)",
+      "where": "orchestrator",
+      "id": "e0031",
+      "seq": 31,
+      "trace_id": "7d43cb7b201f6a6dcd3c8e0b0087c232",
+      "span_id": "03860bfe4cbdd186",
+      "parent_span_id": "56a1745295df6f54",
+      "start_time": 1788858004750,
+      "end_time": 1788858005000,
+      "status": "ERROR"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "prompt_hash": "0bc4769ce8b64f9452e209f9d0fdcb89b7618538eb346af8e622d962524b2ad8",
+  "actor": "agent",
+  "model": "gpt-4o-mini",
+  "temperature": 0,
+  "recorded_at": "2026-09-08T19:45:30.097Z",
+  "request": {
+    "system": "You are a voice agent answering the phone for a primary care clinic. You handle\nappointment changes and prescription refills. You are speaking out loud, so keep\nreplies to one or two short sentences and never read out lists of raw data.\n\nBefore discussing any appointment, medication, or pharmacy detail, confirm who you are\nspeaking to by taking their name and date of birth and calling patients.verify. Do not\ndisclose record details to an unverified caller.\n\nYou can only do what your tools do. If a caller asks for something no tool covers, say\nplainly that you cannot do it on this line, and use escalate to pass it to a person.\nNever state or imply that you have done something you have not.\n\nIf a caller mentions a symptom that could be urgent, stop the administrative task\nimmediately and use escalate with urgency \"emergent\". Put the symptom in the summary.\nDo not finish the original request first, and do not give clinical advice.\n\nUse memory.write to record facts you establish: the patient id, which medication, which\npharmacy. If a caller corrects you, write the same key again with the new value.\n\nA tool returning success is not proof that anything changed. After any write\n(pharmacy.set_preferred, appointments.reschedule, refill.request), read the record back\nwith the matching lookup tool and confirm the new value is present before you tell the\ncaller it is done. If the read-back disagrees, try the write once more.\n\nWhen the caller has nothing further, say goodbye briefly.",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Hi, this is Dana Whitfield. I’d like to move my Thursday appointment with Dr. Patel to next week, preferably in the mornings if possible."
+      },
+      {
+        "role": "assistant",
+        "content": "I can help with that, but first, can you please provide your date of birth?"
+      },
+      {
+        "role": "user",
+        "content": "My name is Dana Whitfield, and my date of birth is March 14, 1978."
+      }
+    ],
+    "tools": [
+      "patients__verify",
+      "appointments__list",
+      "availability__search",
+      "appointments__reschedule",
+      "appointments__cancel",
+      "medications__list",
+      "pharmacies__search",
+      "pharmacy__get_preferred",
+      "pharmacy__set_preferred",
+      "refill__request",
+      "escalate",
+      "memory__write"
+    ]
+  },
+  "response": {
+    "text": "",
+    "provider": "openai",
+    "tool_calls": [
+      {
+        "id": "call_aFC1O7qiNAvfFpGrtos7fdgb",
+        "name": "patients__verify",
+        "args": {
+          "name": "Dana Whitfield",
+          "dob": "1978-03-14"
+        }
+      }
+    ],
+    "model": "gpt-4o-mini-2024-07-18",
+    "usage": {
+      "input_tokens": 893,
+      "output_tokens": 28
+    },
+    "prompt_hash": "0bc4769ce8b64f9452e209f9d0fdcb89b7618538eb346af8e622d962524b2ad8"
+  }
+}

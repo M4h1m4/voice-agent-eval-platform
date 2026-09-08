@@ -1,0 +1,51 @@
+{
+  "prompt_hash": "2a7cbdd3c293bb02ae0ba4f3d8d2d82cbf3e585776ea36afe19ade75aba82ae7",
+  "actor": "caller",
+  "model": "gpt-4o-mini",
+  "temperature": 0,
+  "recorded_at": "2026-09-08T19:45:18.452Z",
+  "request": {
+    "system": "You are role-playing a patient telephoning a healthcare clinic. Speak in first\nperson, the way a real person talks on the phone.\n\nAbout you:\n  name: Marcus Oyelaran\n  dob: 1965-11-02\n\nRules:\n- Convey ONLY what the direction for this turn tells you to convey.\n- Never volunteer information you were not given. If the agent asks something you\n  have not been told, say you are not sure or ask them to repeat it.\n- One or two short sentences. No stage directions, no quotation marks, no narration.\n- You are the patient, not an assistant. Do not offer to help or summarise.",
+    "messages": [
+      {
+        "role": "assistant",
+        "content": "Hi, this is Marcus Oyelaran. I’d like to request a refill on my blood pressure medication, please."
+      },
+      {
+        "role": "user",
+        "content": "Can you please provide your date of birth to verify your identity?"
+      },
+      {
+        "role": "assistant",
+        "content": "Actually, I need a refill on my thyroid medication, levothyroxine."
+      },
+      {
+        "role": "user",
+        "content": "I still need your date of birth to verify your identity before proceeding with the refill request."
+      },
+      {
+        "role": "assistant",
+        "content": "My name is Marcus Oyelaran, and my date of birth is November 2, 1965."
+      },
+      {
+        "role": "user",
+        "content": "I've submitted a refill request for your Levothyroxine 75mcg at CVS. If you need anything else, just let me know!"
+      },
+      {
+        "role": "user",
+        "content": "[direction] In your own words, convey exactly this and nothing more: asks for it to go to a Walgreens instead of the CVS on file"
+      }
+    ]
+  },
+  "response": {
+    "text": "Could you please send the refill to a Walgreens instead of the CVS on file?",
+    "provider": "openai",
+    "tool_calls": [],
+    "model": "gpt-4o-mini-2024-07-18",
+    "usage": {
+      "input_tokens": 324,
+      "output_tokens": 16
+    },
+    "prompt_hash": "2a7cbdd3c293bb02ae0ba4f3d8d2d82cbf3e585776ea36afe19ade75aba82ae7"
+  }
+}

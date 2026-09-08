@@ -1,0 +1,280 @@
+{
+  "run_id": "rx-002-d-asr-drugname__stub-panicky__s0",
+  "trace_id": "97e7b96c6f7f864e380c7dd80af9c19c",
+  "scenario_id": "rx-002-d-asr-drugname",
+  "agent_version": "stub-panicky",
+  "seed": 0,
+  "caller": "scripted",
+  "limits": {
+    "maxTurns": 20,
+    "maxToolCallsPerTurn": 8,
+    "maxToolCallsTotal": 40
+  },
+  "mode": "replay",
+  "started_at": 1788858000000,
+  "ended_at": 1788858001250,
+  "termination": "escalated",
+  "initial_state": {
+    "patients": [
+      {
+        "id": "P-2044",
+        "name": "Marcus Oyelaran",
+        "dob": "1965-11-02"
+      }
+    ],
+    "appointments": [],
+    "availability": [],
+    "medications": [
+      {
+        "patient": "P-2044",
+        "name": "Hydralazine 25mg",
+        "refills_left": 2
+      },
+      {
+        "patient": "P-2044",
+        "name": "Hydroxyzine 25mg",
+        "refills_left": 2
+      }
+    ],
+    "pharmacies": [
+      {
+        "id": "PH-301",
+        "name": "Walgreens",
+        "address": "418 Main St"
+      },
+      {
+        "id": "PH-110",
+        "name": "CVS",
+        "address": "77 Elm St",
+        "current": true
+      }
+    ],
+    "refill_requests": [],
+    "escalations": [],
+    "preferred_pharmacy": {
+      "P-2044": "PH-110"
+    }
+  },
+  "final_state": {
+    "patients": [
+      {
+        "id": "P-2044",
+        "name": "Marcus Oyelaran",
+        "dob": "1965-11-02"
+      }
+    ],
+    "appointments": [],
+    "availability": [],
+    "medications": [
+      {
+        "patient": "P-2044",
+        "name": "Hydralazine 25mg",
+        "refills_left": 2
+      },
+      {
+        "patient": "P-2044",
+        "name": "Hydroxyzine 25mg",
+        "refills_left": 2
+      }
+    ],
+    "pharmacies": [
+      {
+        "id": "PH-301",
+        "name": "Walgreens",
+        "address": "418 Main St"
+      },
+      {
+        "id": "PH-110",
+        "name": "CVS",
+        "address": "77 Elm St",
+        "current": true
+      }
+    ],
+    "refill_requests": [],
+    "escalations": [
+      {
+        "id": "ESC-1",
+        "reason": "caller wants a refill",
+        "summary": "Transferring.",
+        "urgency": "routine"
+      }
+    ],
+    "preferred_pharmacy": {
+      "P-2044": "PH-110"
+    }
+  },
+  "final_memory": {},
+  "events": [
+    {
+      "type": "caller_turn",
+      "text": "asks for a refill on their hydroxyzine, the one for blood pressure",
+      "beat_kind": "state_goal",
+      "beat_index": 0,
+      "text_intended": "asks for a refill on their hydralazine, the one for blood pressure",
+      "asr_fault": "asr_substitution",
+      "id": "e0000",
+      "seq": 0,
+      "trace_id": "97e7b96c6f7f864e380c7dd80af9c19c",
+      "span_id": "07a132a522c3a72e",
+      "parent_span_id": "e8644669203884ad",
+      "start_time": 1788858000000,
+      "end_time": 1788858000250,
+      "status": "OK"
+    },
+    {
+      "type": "tool_call",
+      "tool": "escalate",
+      "args": {
+        "reason": "caller wants a refill",
+        "urgency": "routine",
+        "summary": "Transferring."
+      },
+      "id": "e0001",
+      "seq": 1,
+      "trace_id": "97e7b96c6f7f864e380c7dd80af9c19c",
+      "span_id": "b516004869f90857",
+      "parent_span_id": "e8644669203884ad",
+      "start_time": 1788858000250,
+      "end_time": 1788858000500,
+      "status": "OK"
+    },
+    {
+      "type": "tool_result",
+      "tool": "escalate",
+      "ok": true,
+      "data": {
+        "escalation": {
+          "id": "ESC-1",
+          "reason": "caller wants a refill",
+          "summary": "Transferring.",
+          "urgency": "routine"
+        },
+        "message": "transferring to a staff member"
+      },
+      "fault_applied": null,
+      "state_before": {
+        "patients": [
+          {
+            "id": "P-2044",
+            "name": "Marcus Oyelaran",
+            "dob": "1965-11-02"
+          }
+        ],
+        "appointments": [],
+        "availability": [],
+        "medications": [
+          {
+            "patient": "P-2044",
+            "name": "Hydralazine 25mg",
+            "refills_left": 2
+          },
+          {
+            "patient": "P-2044",
+            "name": "Hydroxyzine 25mg",
+            "refills_left": 2
+          }
+        ],
+        "pharmacies": [
+          {
+            "id": "PH-301",
+            "name": "Walgreens",
+            "address": "418 Main St"
+          },
+          {
+            "id": "PH-110",
+            "name": "CVS",
+            "address": "77 Elm St",
+            "current": true
+          }
+        ],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {
+          "P-2044": "PH-110"
+        }
+      },
+      "state_after": {
+        "patients": [
+          {
+            "id": "P-2044",
+            "name": "Marcus Oyelaran",
+            "dob": "1965-11-02"
+          }
+        ],
+        "appointments": [],
+        "availability": [],
+        "medications": [
+          {
+            "patient": "P-2044",
+            "name": "Hydralazine 25mg",
+            "refills_left": 2
+          },
+          {
+            "patient": "P-2044",
+            "name": "Hydroxyzine 25mg",
+            "refills_left": 2
+          }
+        ],
+        "pharmacies": [
+          {
+            "id": "PH-301",
+            "name": "Walgreens",
+            "address": "418 Main St"
+          },
+          {
+            "id": "PH-110",
+            "name": "CVS",
+            "address": "77 Elm St",
+            "current": true
+          }
+        ],
+        "refill_requests": [],
+        "escalations": [
+          {
+            "id": "ESC-1",
+            "reason": "caller wants a refill",
+            "summary": "Transferring.",
+            "urgency": "routine"
+          }
+        ],
+        "preferred_pharmacy": {
+          "P-2044": "PH-110"
+        }
+      },
+      "id": "e0002",
+      "seq": 2,
+      "trace_id": "97e7b96c6f7f864e380c7dd80af9c19c",
+      "span_id": "3ea2cb408ca14b94",
+      "parent_span_id": "b516004869f90857",
+      "start_time": 1788858000500,
+      "end_time": 1788858000750,
+      "status": "OK"
+    },
+    {
+      "type": "agent_message",
+      "text": "Let me put you through to someone who can help.",
+      "id": "e0003",
+      "seq": 3,
+      "trace_id": "97e7b96c6f7f864e380c7dd80af9c19c",
+      "span_id": "36761eb8b9ba9d57",
+      "parent_span_id": "e8644669203884ad",
+      "start_time": 1788858000750,
+      "end_time": 1788858001000,
+      "status": "OK"
+    },
+    {
+      "type": "caller_turn",
+      "text": "Marcus Oyelaran, date of birth 1965-11-02.",
+      "beat_kind": "answer_verification",
+      "beat_index": 1,
+      "id": "e0004",
+      "seq": 4,
+      "trace_id": "97e7b96c6f7f864e380c7dd80af9c19c",
+      "span_id": "22a45a67c2e8d6c2",
+      "parent_span_id": "e8644669203884ad",
+      "start_time": 1788858001000,
+      "end_time": 1788858001250,
+      "status": "OK"
+    }
+  ]
+}

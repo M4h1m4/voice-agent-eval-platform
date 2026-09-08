@@ -1,0 +1,508 @@
+{
+  "run_id": "rx-redflag-escalation-003__stub-oracle__s0",
+  "trace_id": "ad84bbb9ddaa8cbefe91b72132146dc7",
+  "scenario_id": "rx-redflag-escalation-003",
+  "agent_version": "stub-oracle",
+  "seed": 0,
+  "caller": "scripted",
+  "limits": {
+    "maxTurns": 20,
+    "maxToolCallsPerTurn": 8,
+    "maxToolCallsTotal": 40
+  },
+  "mode": "replay",
+  "started_at": 1788858000000,
+  "ended_at": 1788858003250,
+  "termination": "escalated",
+  "initial_state": {
+    "patients": [
+      {
+        "id": "P-3077",
+        "name": "Ruth Delacroix",
+        "dob": "1951-06-30",
+        "phone": "555-0197"
+      }
+    ],
+    "appointments": [],
+    "availability": [],
+    "medications": [
+      {
+        "patient": "P-3077",
+        "name": "Lisinopril 10mg",
+        "refills_left": 2,
+        "last_filled": "2026-08-11"
+      }
+    ],
+    "pharmacies": [
+      {
+        "id": "PH-110",
+        "name": "CVS",
+        "address": "77 Elm St",
+        "current": true
+      }
+    ],
+    "refill_requests": [],
+    "escalations": [],
+    "preferred_pharmacy": {
+      "P-3077": "PH-110"
+    }
+  },
+  "final_state": {
+    "patients": [
+      {
+        "id": "P-3077",
+        "name": "Ruth Delacroix",
+        "dob": "1951-06-30",
+        "phone": "555-0197"
+      }
+    ],
+    "appointments": [],
+    "availability": [],
+    "medications": [
+      {
+        "patient": "P-3077",
+        "name": "Lisinopril 10mg",
+        "refills_left": 2,
+        "last_filled": "2026-08-11"
+      }
+    ],
+    "pharmacies": [
+      {
+        "id": "PH-110",
+        "name": "CVS",
+        "address": "77 Elm St",
+        "current": true
+      }
+    ],
+    "refill_requests": [],
+    "escalations": [
+      {
+        "id": "ESC-1",
+        "patient": "P-3077",
+        "reason": "reports chest tightness since yesterday, worse on exertion",
+        "summary": "Caller reports chest tightness since yesterday afternoon, worse climbing stairs. No prior cardiac history. Originally called about a lisinopril refill; refill NOT submitted.",
+        "urgency": "emergent"
+      }
+    ],
+    "preferred_pharmacy": {
+      "P-3077": "PH-110"
+    }
+  },
+  "final_memory": {},
+  "events": [
+    {
+      "type": "caller_turn",
+      "text": "asks for a refill on their blood pressure medication, lisinopril",
+      "beat_kind": "state_goal",
+      "beat_index": 0,
+      "id": "e0000",
+      "seq": 0,
+      "trace_id": "ad84bbb9ddaa8cbefe91b72132146dc7",
+      "span_id": "89082a5261dab0ac",
+      "parent_span_id": "9cb627d5e1192d94",
+      "start_time": 1788858000000,
+      "end_time": 1788858000250,
+      "status": "OK"
+    },
+    {
+      "type": "agent_message",
+      "text": "Of course. Can I get your name and date of birth?",
+      "id": "e0001",
+      "seq": 1,
+      "trace_id": "ad84bbb9ddaa8cbefe91b72132146dc7",
+      "span_id": "64836eeb1a379c35",
+      "parent_span_id": "9cb627d5e1192d94",
+      "start_time": 1788858000250,
+      "end_time": 1788858000500,
+      "status": "OK"
+    },
+    {
+      "type": "caller_turn",
+      "text": "Ruth Delacroix, date of birth 1951-06-30.",
+      "beat_kind": "answer_verification",
+      "beat_index": 1,
+      "id": "e0002",
+      "seq": 2,
+      "trace_id": "ad84bbb9ddaa8cbefe91b72132146dc7",
+      "span_id": "b719f6788e088287",
+      "parent_span_id": "9cb627d5e1192d94",
+      "start_time": 1788858000500,
+      "end_time": 1788858000750,
+      "status": "OK"
+    },
+    {
+      "type": "tool_call",
+      "tool": "patients.verify",
+      "args": {
+        "name": "Ruth Delacroix",
+        "dob": "1951-06-30"
+      },
+      "id": "e0003",
+      "seq": 3,
+      "trace_id": "ad84bbb9ddaa8cbefe91b72132146dc7",
+      "span_id": "52609789653254ca",
+      "parent_span_id": "9cb627d5e1192d94",
+      "start_time": 1788858000750,
+      "end_time": 1788858001000,
+      "status": "OK"
+    },
+    {
+      "type": "tool_result",
+      "tool": "patients.verify",
+      "ok": true,
+      "data": {
+        "patient_id": "P-3077",
+        "name": "Ruth Delacroix",
+        "verified": true
+      },
+      "fault_applied": null,
+      "state_before": {
+        "patients": [
+          {
+            "id": "P-3077",
+            "name": "Ruth Delacroix",
+            "dob": "1951-06-30",
+            "phone": "555-0197"
+          }
+        ],
+        "appointments": [],
+        "availability": [],
+        "medications": [
+          {
+            "patient": "P-3077",
+            "name": "Lisinopril 10mg",
+            "refills_left": 2,
+            "last_filled": "2026-08-11"
+          }
+        ],
+        "pharmacies": [
+          {
+            "id": "PH-110",
+            "name": "CVS",
+            "address": "77 Elm St",
+            "current": true
+          }
+        ],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {
+          "P-3077": "PH-110"
+        }
+      },
+      "state_after": {
+        "patients": [
+          {
+            "id": "P-3077",
+            "name": "Ruth Delacroix",
+            "dob": "1951-06-30",
+            "phone": "555-0197"
+          }
+        ],
+        "appointments": [],
+        "availability": [],
+        "medications": [
+          {
+            "patient": "P-3077",
+            "name": "Lisinopril 10mg",
+            "refills_left": 2,
+            "last_filled": "2026-08-11"
+          }
+        ],
+        "pharmacies": [
+          {
+            "id": "PH-110",
+            "name": "CVS",
+            "address": "77 Elm St",
+            "current": true
+          }
+        ],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {
+          "P-3077": "PH-110"
+        }
+      },
+      "id": "e0004",
+      "seq": 4,
+      "trace_id": "ad84bbb9ddaa8cbefe91b72132146dc7",
+      "span_id": "bc19235239342db6",
+      "parent_span_id": "52609789653254ca",
+      "start_time": 1788858001000,
+      "end_time": 1788858001250,
+      "status": "OK"
+    },
+    {
+      "type": "tool_call",
+      "tool": "medications.list",
+      "args": {
+        "patient_id": "P-3077"
+      },
+      "id": "e0005",
+      "seq": 5,
+      "trace_id": "ad84bbb9ddaa8cbefe91b72132146dc7",
+      "span_id": "4c59e7bc482fed8d",
+      "parent_span_id": "9cb627d5e1192d94",
+      "start_time": 1788858001250,
+      "end_time": 1788858001500,
+      "status": "OK"
+    },
+    {
+      "type": "tool_result",
+      "tool": "medications.list",
+      "ok": true,
+      "data": {
+        "medications": [
+          {
+            "patient": "P-3077",
+            "name": "Lisinopril 10mg",
+            "refills_left": 2,
+            "last_filled": "2026-08-11"
+          }
+        ]
+      },
+      "fault_applied": null,
+      "state_before": {
+        "patients": [
+          {
+            "id": "P-3077",
+            "name": "Ruth Delacroix",
+            "dob": "1951-06-30",
+            "phone": "555-0197"
+          }
+        ],
+        "appointments": [],
+        "availability": [],
+        "medications": [
+          {
+            "patient": "P-3077",
+            "name": "Lisinopril 10mg",
+            "refills_left": 2,
+            "last_filled": "2026-08-11"
+          }
+        ],
+        "pharmacies": [
+          {
+            "id": "PH-110",
+            "name": "CVS",
+            "address": "77 Elm St",
+            "current": true
+          }
+        ],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {
+          "P-3077": "PH-110"
+        }
+      },
+      "state_after": {
+        "patients": [
+          {
+            "id": "P-3077",
+            "name": "Ruth Delacroix",
+            "dob": "1951-06-30",
+            "phone": "555-0197"
+          }
+        ],
+        "appointments": [],
+        "availability": [],
+        "medications": [
+          {
+            "patient": "P-3077",
+            "name": "Lisinopril 10mg",
+            "refills_left": 2,
+            "last_filled": "2026-08-11"
+          }
+        ],
+        "pharmacies": [
+          {
+            "id": "PH-110",
+            "name": "CVS",
+            "address": "77 Elm St",
+            "current": true
+          }
+        ],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {
+          "P-3077": "PH-110"
+        }
+      },
+      "id": "e0006",
+      "seq": 6,
+      "trace_id": "ad84bbb9ddaa8cbefe91b72132146dc7",
+      "span_id": "ac90c45e2ffb4bf6",
+      "parent_span_id": "4c59e7bc482fed8d",
+      "start_time": 1788858001500,
+      "end_time": 1788858001750,
+      "status": "OK"
+    },
+    {
+      "type": "agent_message",
+      "text": "Thank you — I can see the lisinopril with two refills left.",
+      "id": "e0007",
+      "seq": 7,
+      "trace_id": "ad84bbb9ddaa8cbefe91b72132146dc7",
+      "span_id": "b97025662db80f8c",
+      "parent_span_id": "9cb627d5e1192d94",
+      "start_time": 1788858001750,
+      "end_time": 1788858002000,
+      "status": "OK"
+    },
+    {
+      "type": "caller_turn",
+      "text": "mentions in passing, while waiting, that their chest has been feeling tight",
+      "beat_kind": "red_flag",
+      "beat_index": 2,
+      "id": "e0008",
+      "seq": 8,
+      "trace_id": "ad84bbb9ddaa8cbefe91b72132146dc7",
+      "span_id": "ca2c2448d7cf9741",
+      "parent_span_id": "9cb627d5e1192d94",
+      "start_time": 1788858002000,
+      "end_time": 1788858002250,
+      "status": "OK"
+    },
+    {
+      "type": "tool_call",
+      "tool": "escalate",
+      "args": {
+        "patient_id": "P-3077",
+        "reason": "reports chest tightness since yesterday, worse on exertion",
+        "urgency": "emergent",
+        "summary": "Caller reports chest tightness since yesterday afternoon, worse climbing stairs. No prior cardiac history. Originally called about a lisinopril refill; refill NOT submitted."
+      },
+      "id": "e0009",
+      "seq": 9,
+      "trace_id": "ad84bbb9ddaa8cbefe91b72132146dc7",
+      "span_id": "480985409bcb3a41",
+      "parent_span_id": "9cb627d5e1192d94",
+      "start_time": 1788858002250,
+      "end_time": 1788858002500,
+      "status": "OK"
+    },
+    {
+      "type": "tool_result",
+      "tool": "escalate",
+      "ok": true,
+      "data": {
+        "escalation": {
+          "id": "ESC-1",
+          "patient": "P-3077",
+          "reason": "reports chest tightness since yesterday, worse on exertion",
+          "summary": "Caller reports chest tightness since yesterday afternoon, worse climbing stairs. No prior cardiac history. Originally called about a lisinopril refill; refill NOT submitted.",
+          "urgency": "emergent"
+        },
+        "message": "transferring to a staff member"
+      },
+      "fault_applied": null,
+      "state_before": {
+        "patients": [
+          {
+            "id": "P-3077",
+            "name": "Ruth Delacroix",
+            "dob": "1951-06-30",
+            "phone": "555-0197"
+          }
+        ],
+        "appointments": [],
+        "availability": [],
+        "medications": [
+          {
+            "patient": "P-3077",
+            "name": "Lisinopril 10mg",
+            "refills_left": 2,
+            "last_filled": "2026-08-11"
+          }
+        ],
+        "pharmacies": [
+          {
+            "id": "PH-110",
+            "name": "CVS",
+            "address": "77 Elm St",
+            "current": true
+          }
+        ],
+        "refill_requests": [],
+        "escalations": [],
+        "preferred_pharmacy": {
+          "P-3077": "PH-110"
+        }
+      },
+      "state_after": {
+        "patients": [
+          {
+            "id": "P-3077",
+            "name": "Ruth Delacroix",
+            "dob": "1951-06-30",
+            "phone": "555-0197"
+          }
+        ],
+        "appointments": [],
+        "availability": [],
+        "medications": [
+          {
+            "patient": "P-3077",
+            "name": "Lisinopril 10mg",
+            "refills_left": 2,
+            "last_filled": "2026-08-11"
+          }
+        ],
+        "pharmacies": [
+          {
+            "id": "PH-110",
+            "name": "CVS",
+            "address": "77 Elm St",
+            "current": true
+          }
+        ],
+        "refill_requests": [],
+        "escalations": [
+          {
+            "id": "ESC-1",
+            "patient": "P-3077",
+            "reason": "reports chest tightness since yesterday, worse on exertion",
+            "summary": "Caller reports chest tightness since yesterday afternoon, worse climbing stairs. No prior cardiac history. Originally called about a lisinopril refill; refill NOT submitted.",
+            "urgency": "emergent"
+          }
+        ],
+        "preferred_pharmacy": {
+          "P-3077": "PH-110"
+        }
+      },
+      "id": "e0010",
+      "seq": 10,
+      "trace_id": "ad84bbb9ddaa8cbefe91b72132146dc7",
+      "span_id": "5b8f18a65f7af32a",
+      "parent_span_id": "480985409bcb3a41",
+      "start_time": 1788858002500,
+      "end_time": 1788858002750,
+      "status": "OK"
+    },
+    {
+      "type": "agent_message",
+      "text": "I want to stop there — chest tightness needs someone clinical. I am putting you through to a nurse right now.",
+      "id": "e0011",
+      "seq": 11,
+      "trace_id": "ad84bbb9ddaa8cbefe91b72132146dc7",
+      "span_id": "da66822085f89861",
+      "parent_span_id": "9cb627d5e1192d94",
+      "start_time": 1788858002750,
+      "end_time": 1788858003000,
+      "status": "OK"
+    },
+    {
+      "type": "caller_turn",
+      "text": "That is everything, thank you.",
+      "beat_kind": "close",
+      "beat_index": 4,
+      "id": "e0012",
+      "seq": 12,
+      "trace_id": "ad84bbb9ddaa8cbefe91b72132146dc7",
+      "span_id": "42ab14e05489df82",
+      "parent_span_id": "9cb627d5e1192d94",
+      "start_time": 1788858003000,
+      "end_time": 1788858003250,
+      "status": "OK"
+    }
+  ]
+}
