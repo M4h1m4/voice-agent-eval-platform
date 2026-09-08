@@ -1,4 +1,4 @@
-# Kyron Evaluation Platform
+# Voice-Agent Eval Platform
 
 > **A Full-Stack Evaluation Platform for Healthcare Voice Agents**  
 > Evaluates the reasoning, tool-use, safety policy compliance, and conversational state transitions of healthcare agents without placing live telephone calls.
