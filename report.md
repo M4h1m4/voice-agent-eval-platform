@@ -524,6 +524,33 @@ Running the suite under two distinct testing arms produced fundamentally differe
 * **Controlled Arm (Scripted Caller):** By holding the caller byte-identical across both versions, the controlled arm revealed that **4 metrics improved** under v2 (read-back compliance succeeded on non-looping scenarios) while **6 metrics regressed**.
 * **Conclusion:** The read-back prompt was not wholly defective; it achieved its stated verification goal in simple flows while introducing a severe oscillation loop in multi-slot flows.
 
+### What I Would and Would Not Conclude From This Experiment
+
+**Supported by the evidence:**
+* On this scenario, this model, and these five seeds, the composite read-back instruction
+  causes tool-budget exhaustion on 4 of 5 samples and improves read-back compliance on
+  simple flows. Both halves are real; neither cancels the other.
+* An outcome-only evaluator returns a **verdict determined by an arbitrary harness
+  constant** on the looping runs. That is a property of outcome-only evaluation, not of
+  this particular agent, and it generalises.
+* The scenarios discriminate: a careful reference agent passes all seven and a careless one
+  fails all seven.
+
+**Not supported, and deliberately not claimed:**
+* **That read-back instructions are harmful.** One model, one phrasing, one temperature,
+  seven scenarios. What the evidence supports is narrower and more useful: *an instruction
+  that pairs a check with a remediation can have its check dropped and its remediation
+  kept, and the result is unbounded action.* The intervention to test next is separating
+  them, not deleting the instruction.
+* **Any prevalence estimate.** The scenario mix is weighted toward hard cases by design. A
+  26% pass rate here says nothing about a production pass rate.
+* **That v2 is worse overall.** The reactive arm says so; the controlled arm shows 4
+  metrics improving. A single-arm comparison would have reported a conclusion the second
+  arm contradicts.
+* **That the remaining evaluators are correct.** 15 of 19 metrics are pinned to a
+  fail/pass pair; 4 are declared unprovable from this corpus. Fixtures pin current
+  behaviour, so they catch a metric that *stops* discriminating, not one that never did.
+
 ---
 
 ## Deliverable 7: Product Findings & Production Notes (Part 6 & Part 7)
@@ -609,6 +636,59 @@ To evolve this evaluation platform into an enterprise system processing high cal
 * Synthetic evaluation datasets are maintained entirely separate from production patient databases.
 
 ---
+
+#### 6. Customer-Specific Policies
+
+Policies are **data, not code branches** — `policies.yaml` carries an id, a plain-English
+`statement`, a `severity`, and a `check` descriptor naming the evaluator that enforces it.
+A customer with a stricter identity rule, or one that permits pharmacy changes without
+call-back confirmation, gets a **policy file**, not a fork of the evaluator.
+
+Two properties make that workable at scale. The `statement` is the same string shown in
+the UI beside a violation and pasted into the judge prompt, so a deterministic check and
+an LLM judge cannot drift into two paraphrases of the same rule. And the startup registry
+guard means a customer policy referencing an unimplemented `check.kind` fails at deploy
+rather than passing silently in production.
+
+Per-customer scenario suites follow the same shape: scenarios are files, so a customer
+suite is a directory, versioned and reviewed like any other config.
+
+#### 7. Observability and Debugging
+
+The trace already carries OTel-shaped `trace_id` / `span_id` / `parent_span_id`, so a
+recorded evaluation joins the same distributed trace as the production call that produced
+it. Debugging a bad verdict is then a single query rather than a correlation exercise.
+
+Three things make a verdict debuggable rather than merely reportable:
+
+* **`evidence_events`** — every failing metric names the trace events it rests on, so the
+  question is "look at these three turns", not "read the call".
+* **`trace.limits`** — the instrument constants a run executed under travel with the
+  verdict. A result that depends on a cap is unverifiable without knowing the cap.
+* **`text` vs `text_intended`** on caller turns — where an input was corrupted, both the
+  received and the intended value are recorded, so ground truth survives the corruption.
+
+The gap worth closing first: there is no **cross-run failure-pattern aggregation**. Today
+a reviewer sees which runs failed and why, one at a time. At thousands of calls a day the
+first question is "which failure repeats", and answering it by hand does not scale.
+
+#### 8. Turning Findings Into Owned Product Work
+
+An evaluation platform that produces a dashboard nobody acts on has failed. Three
+mechanics close that loop:
+
+1. **Every failure carries a policy id and a severity**, so a regression is already
+   labelled with the rule it broke and how much it matters. Routing is a lookup, not a
+   triage meeting.
+2. **Regression gates block the release, not a report.** A metric moving from pass to fail
+   on the pinned corpus fails the build. The finding cannot be deferred by being ignored.
+3. **A failure becomes a scenario.** The workflow for a production incident is: reproduce
+   it as a scenario file, confirm it fails, ship the fix, confirm it passes. The suite
+   then permanently protects against that regression — which is how a one-off finding
+   becomes owned, durable product work rather than a fixed ticket.
+
+The same loop is how this project's own evaluator defects were handled: each became a test
+that fails if the defect returns.
 
 ### Conclusion
 This platform demonstrates that evaluating healthcare voice agents requires looking beyond conversational plausibility. Superficially polished dialogues frequently mask severe operational failures—such as unperformed database writes and unbounded rescheduling loops. By combining deterministic world-state verification, process-level execution monitoring, and calibrated qualitative judges, this platform provides the exact instrumentation needed to deploy safe, reliable clinical automation.
