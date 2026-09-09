@@ -3,13 +3,16 @@
 > **A Full-Stack Evaluation Platform for Healthcare Voice Agents**  
 > Evaluates the reasoning, tool-use, safety policy compliance, and conversational state transitions of healthcare agents without placing live telephone calls.
 
+🎥 **Walkthrough Video Demo:** [Watch on Google Drive](https://drive.google.com/file/d/1U8ajRFr7-Vb0RsftVQqTMo0YPwJ-MeJr/view?usp=sharing)
+
 > A confident *"you're all set"* and a database that never changed look identical in a
 > transcript. This platform scores runs against clinic state, not dialogue.
 
-### 📄 Documentation
+### 📄 Documentation & Links
 
 | | |
 |---|---|
+| 🎥 **[Walkthrough Demo Video](https://drive.google.com/file/d/1U8ajRFr7-Vb0RsftVQqTMo0YPwJ-MeJr/view?usp=sharing)** | Single-take walkthrough of the evaluation platform, key findings, and live UI inspection. |
 | **[report.md](report.md)** | The full writeup — dataset design, all 19 metric specifications, the v1/v2 experiment and its findings, product recommendations, production notes. **Start here for the substance.** |
 | **[ARCHITECTURE.md](ARCHITECTURE.md)** | How the system is built and why — components, boundaries, the metric taxonomy, and the design constraints each choice answers. |
 
