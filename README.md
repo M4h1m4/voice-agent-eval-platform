@@ -3,6 +3,16 @@
 > **A Full-Stack Evaluation Platform for Healthcare Voice Agents**  
 > Evaluates the reasoning, tool-use, safety policy compliance, and conversational state transitions of healthcare agents without placing live telephone calls.
 
+> A confident *"you're all set"* and a database that never changed look identical in a
+> transcript. This platform scores runs against clinic state, not dialogue.
+
+### 📄 Documentation
+
+| | |
+|---|---|
+| **[report.md](report.md)** | The full writeup — dataset design, all 19 metric specifications, the v1/v2 experiment and its findings, product recommendations, production notes. **Start here for the substance.** |
+| **[ARCHITECTURE.md](ARCHITECTURE.md)** | How the system is built and why — components, boundaries, the metric taxonomy, and the design constraints each choice answers. |
+
 ---
 
 ## Quickstart (The Zero-Key Story)
@@ -114,8 +124,7 @@ lib/server/index.ts  +  public/                  <- Part 4: Zero-dependency REST
 
 ---
 
-## Full Documentation
+## Documentation
 
-For the complete technical writeup, detailed specifications of all 19 metrics, manual label calibration, experimental findings, product recommendations, and production architecture design, see:
-
-📄 **[report.md](report.md)**
+* 📄 **[report.md](report.md)** — dataset design, metric specifications, manual label calibration, experimental findings, product recommendations, production notes.
+* 🏗️ **[ARCHITECTURE.md](ARCHITECTURE.md)** — components, boundaries, and the reasoning behind each design choice.
