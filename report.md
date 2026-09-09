@@ -406,12 +406,13 @@ Across 5 distinct evaluation seeds ($s_0$ through $s_4$):
 | **Caller Turns Reached** | 4 turns (the full conversation) | **2 turns** on the looping seeds | The caller was abandoned mid-call |
 | **Final Appointment State** | Tuesday 09:30 (correct) on 5/5 | **Monday 09:00 (the slot the caller refused)** on 4/5 | Wrong slot booked |
 
-**Seed 0 is the exception, and it matters.** It is the one seed where v2 does not loop, and
-every claim in an earlier draft of this report rested on it. When the corpus was
-re-recorded, seed 0's loop disappeared and the finding briefly looked overturned — which
-was itself an n=1 reading, made the same way as the original error. Running five seeds is
-what turned an anecdote into a result. The excerpt below is therefore taken from `s1`, not
-`s0`.
+**Seed 0 is the exception**, and it is why the experiment runs five seeds rather than one.
+It is the single seed on which v2 does not loop. A single-sample comparison against seed 0
+would have reported no regression at all; a single-sample comparison against any other
+would have reported the loop as deterministic. Neither is true. The defensible claim is
+*"v2 exhausts its tool budget on 4 of 5 samples"* — and stating it that way is only
+possible because the seed reaches the model and the runner supports `--seeds`. The excerpt
+below is taken from `s1`.
 
 #### Raw Trace Excerpt: The Write-Oscillation Loop
 Trace excerpt from `sched-reschedule-clean-001__llm-v2__s1` (the agent oscillating between the two candidate slots). Event ids are the ones `redundant_writes` cites under `evidence_events`:
@@ -456,51 +457,66 @@ drug cleanly, the refill call succeeds, and nothing downstream objects.
 | `llm-v1` | Dispensed hydroxyzine, announced it, was corrected by the caller, then dispensed hydralazine. **Both prescriptions went out.** |
 | `llm-v2` | Dispensed hydroxyzine and closed the call. The patient never learned. |
 
-**The first version of this fault was too easy, and its finding was worthless.** It used
-`levothyroxine -> levothyroxin`, a one-character deletion. Both agents recovered it
-instantly by looking the name up, and the reported result — "entity recovery is present" —
-turned out to mean almost nothing. A misspelling is not what a transcription layer does.
-The dangerous real case is a mis-heard name that is *itself a valid medication on the
-chart*, because then nothing downstream can object.
+**The fault is deliberately a real drug, not a misspelling.** A corrupted name that is
+merely misspelled (`levothyroxine` → `levothyroxin`) is recovered instantly by any record
+lookup and tests almost nothing. The dangerous case — and the one this scenario models — is
+a mis-heard name that is *itself a valid medication already on the patient's chart*, so the
+lookup resolves it, the write succeeds, and no downstream check can object. The only
+available signal is confirming with the caller, which is what makes the fault fair rather
+than unpassable.
 
-Note also **how** v1 recovered: it read the drug name aloud only while confirming a
-submission it had **already made**. Recovery by luck of phrasing, not by verification.
-Neither agent ever said *"I heard X — is that right?"* before acting.
+Note **how** v1 recovered: it read the drug name aloud only while confirming a submission
+it had **already made**. Recovery by luck of phrasing, not by verification. Neither agent
+ever asked *"I heard X — is that right?"* before acting.
 
-### Evaluator Defects Found During the Build
+### Architectural Choice: Verifying the Verifier
 
-Three metrics reported confident, well-formed, well-explained verdicts while verifying
-nothing. **Each was found by reading output, none by a test.** They are documented here
-rather than quietly fixed, because the pattern is the most transferable thing in this
-project.
+An evaluation platform has a failure mode its subject does not: a metric can return a
+confident, well-formed, well-explained verdict while checking nothing at all. Nothing in
+a passing test suite distinguishes that from a working metric — the report looks the
+same either way.
 
-| Defect | Symptom | Root cause |
-|---|---|---|
-| `policy:confirm_pharmacy_when_chain_ambiguous` | `unexercised` on all 55 runs, for the life of the project | Asked `Array.isArray(result.data)`; every tool in this World wraps its rows in an object. **Structurally unable to fire.** |
-| Outcome metrics | `rx-002-d__llm-v1` dispensed the right drug *and* a wrong one, and scored **PASS** | Subset matching confirms an expected record exists; it has no opinion about records that should not. Fixed by adding `unexpected_records`. |
-| `must_not_assert_completion_unless_state_confirms` | **Never fired once.** Reported PASS on the canonical hallucinated completion | Asked whether the world changed *at all*, not whether the *claimed* thing changed. |
+Three defenses are built in, each answering a question the layer above cannot.
 
-The third is the one worth dwelling on: it is the metric this platform's entire thesis
-rests on, and it had never caught anything.
+**1. Startup registry guard.** Every policy in `policies.yaml` and every expectation
+declared in a scenario must resolve to a registered evaluator, asserted at process start.
+A policy that is cited, validated, and displayed while enforcing nothing cannot ship.
 
-**The systematic response**, rather than three point fixes:
+**2. A metric never observed failing fails the suite.** `tests/e2e/evidence.test.ts`
+scans every metric across the whole trace corpus. One that never returns `fail` — across
+a corpus deliberately containing careless and over-cautious agents — is flagged, because
+"correct on everything" and "structurally unable to fire" are indistinguishable from the
+outside. Four metrics are exempted individually, each with a stated reason, so an
+exemption is a decision rather than an accident.
 
-1. A metric never observed failing across the corpus now fails the test suite, with
-   individually justified exemptions (`tests/e2e/evidence.test.ts`).
-2. **Per-metric discrimination fixtures** (`npm run fixtures`): every metric is pinned to a
-   run it must fail and a run it must pass — the same contract
-   `dataset-discrimination.ts` already enforced for scenarios, applied one level down to
-   the thing doing the judging. 15 of 19 metrics are provable from this corpus; the other
-   4 are **declared unprovable** and each was hand-probed on a constructed case to confirm
-   it can fail at all.
-3. Verified by mutation: disabling any of four evaluators, or making one always fail,
-   kills a test.
+**3. Per-metric discrimination fixtures** (`npm run fixtures`). Every metric is pinned to
+a recorded run it must fail and one it must pass. This is the contract
+`dataset-discrimination.ts` already enforces for scenarios — a careful agent passes, a
+careless one fails — applied one level down, to the thing doing the judging. 15 of 19
+metrics are provable from this corpus. The remaining 4 are **declared unprovable** rather
+than assumed correct, and each was probed by hand on a constructed case to confirm it can
+fail at all.
 
-**The honest limit:** the fixtures pin *current* behaviour, so they are a regression net,
-not a proof of correctness. They would have caught all three defects the moment anyone
-touched the code; they would **not** have caught them the moment each was written. For
-that, expected verdicts must be reasoned about by a human rather than sampled — which is
-the top item in the backlog.
+Verified by mutation: disabling any of four evaluators, or making one always fail, kills a
+test. Both directions matter — an evaluator stuck on "always fail" is as broken as one
+stuck on "always pass", and considerably easier to ship by accident.
+
+**The honest limit.** The fixtures pin *current* behaviour, so they are a regression net,
+not a proof of correctness. They catch a metric that stops discriminating; they cannot
+catch one that never did. Replacing sampled expectations with human-reasoned ones is the
+top item in the backlog.
+
+> **A pattern worth naming for any evaluation platform.**
+> Metrics here were originally tested the way you test a utility function — does it
+> return the right shape — rather than the way you test a detector. Three of them turned
+> out to be checking the wrong thing, including the hallucinated-completion metric this
+> platform's thesis rests on, which asked whether the world had changed *at all* rather
+> than whether the *claimed* thing had changed. Each was found by reading output, none by
+> a test.
+> The generalisable lesson is that **an evaluator needs the same pass/fail proof you
+> demand of a scenario.** A test asserting a metric produced a well-formed result asserts
+> almost nothing; only a known-bad input it must reject, and a known-good input it must
+> accept, establishes that it discriminates.
 
 #### Controlled vs. Reactive Comparison Arms
 Running the suite under two distinct testing arms produced fundamentally different insights:
@@ -595,4 +611,4 @@ To evolve this evaluation platform into an enterprise system processing high cal
 ---
 
 ### Conclusion
-The Kyron Evaluation Platform demonstrates that evaluating healthcare voice agents requires looking beyond conversational plausibility. Superficially polished dialogues frequently mask severe operational failures—such as unperformed database writes and unbounded rescheduling loops. By combining deterministic world-state verification, process-level execution monitoring, and calibrated qualitative judges, this platform provides the exact instrumentation needed to deploy safe, reliable clinical automation.
+This platform demonstrates that evaluating healthcare voice agents requires looking beyond conversational plausibility. Superficially polished dialogues frequently mask severe operational failures—such as unperformed database writes and unbounded rescheduling loops. By combining deterministic world-state verification, process-level execution monitoring, and calibrated qualitative judges, this platform provides the exact instrumentation needed to deploy safe, reliable clinical automation.
